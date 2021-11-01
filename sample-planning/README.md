@@ -12,14 +12,14 @@ mvn io.quarkus.platform:quarkus-maven-plugin:2.4.0.Final:create \
     -DbuildTool=gradle
 ```
 
-## to start the application in development mode
-
-```shell
-./gradlew quarkusDev
-```
-
 ## I adding some dependencies
 
 ```shell
 ./gradlew addExtension --extensions="quarkus-jdbc-h2,quarkus-hibernate-orm-panache,quarkus-hibernate-orm-rest-data-panache"
+```
+
+## to start the application in development mode
+
+```shell
+./gradlew quarkusDev
 ```
