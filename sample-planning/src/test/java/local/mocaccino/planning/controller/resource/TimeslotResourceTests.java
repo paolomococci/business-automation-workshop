@@ -2,8 +2,9 @@ package local.mocaccino.planning.controller.resource;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import local.mocaccino.planning.entity.Lecture;
+
 import local.mocaccino.planning.entity.Timeslot;
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
