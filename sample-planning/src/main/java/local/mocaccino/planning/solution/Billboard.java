@@ -1,5 +1,8 @@
-package local.mocaccino.planning.entity;
+package local.mocaccino.planning.solution;
 
+import local.mocaccino.planning.entity.Auditorium;
+import local.mocaccino.planning.entity.Lecture;
+import local.mocaccino.planning.entity.Timeslot;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;

@@ -2,7 +2,7 @@ package local.mocaccino.planning.controller.resource;
 
 import io.quarkus.panache.common.Sort;
 
-import local.mocaccino.planning.entity.Billboard;
+import local.mocaccino.planning.solution.Billboard;
 import local.mocaccino.planning.repository.AuditoriumRepository;
 import local.mocaccino.planning.repository.LectureRepository;
 import local.mocaccino.planning.repository.TimeslotRepository;
