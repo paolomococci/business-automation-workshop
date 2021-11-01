@@ -1,6 +1,6 @@
 package local.mocaccino.planning.controller.resource;
 
-//import io.quarkus.panache.common.Sort;
+import io.quarkus.panache.common.Sort;
 
 import local.mocaccino.planning.entity.Billboard;
 import local.mocaccino.planning.repository.AuditoriumRepository;
@@ -72,13 +72,13 @@ public class BillboardResource {
         }
         return new Billboard(
                 this.auditoriumRepository.listAll(
-                        //Sort.by("label").and("id")
+                        Sort.by("label").and("id")
                 ),
                 this.timeslotRepository.listAll(
-                        //Sort.by("day").and("start").and("end").and("id")
+                        Sort.by("day").and("start").and("end").and("id")
                 ),
                 this.lectureRepository.listAll(
-                        //Sort.by("topic").and("lecturer").and("audience").and("id")
+                        Sort.by("topic").and("lecturer").and("audience").and("id")
                 )
         );
     }
