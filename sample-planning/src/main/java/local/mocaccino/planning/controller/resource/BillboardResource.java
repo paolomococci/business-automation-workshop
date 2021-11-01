@@ -1,5 +1,7 @@
 package local.mocaccino.planning.controller.resource;
 
+//import io.quarkus.panache.common.Sort;
+
 import local.mocaccino.planning.entity.Billboard;
 import local.mocaccino.planning.repository.AuditoriumRepository;
 import local.mocaccino.planning.repository.LectureRepository;
@@ -39,24 +41,46 @@ public class BillboardResource {
 
     @GET
     public Billboard getBillboard() {
-        return null;
+        SolverStatus solverStatus = getSolverStatus();
+        Billboard billboard = findById(SINGLETON_TIME_TABLE_ID);
+        this.billboardScoreManager.updateScore(billboard);
+        billboard.setSolverStatus(solverStatus);
+        return billboard;
     }
 
     @POST
     @Path("start")
     public void startResolution() {
-
+        this.billboardSolverManager.solveAndListen(
+                SINGLETON_TIME_TABLE_ID,
+                this::findById,
+                this::save
+        );
     }
 
     @POST
     @Path("stop")
     public void stopResolution() {
-
+        this.billboardSolverManager
+                .terminateEarly(SINGLETON_TIME_TABLE_ID);
     }
 
     @Transactional
     protected Billboard findById(Long id) {
-        return null;
+        if (!SINGLETON_TIME_TABLE_ID.equals(id)) {
+            throw new IllegalStateException("There is no billboard with id (" + id + ").");
+        }
+        return new Billboard(
+                this.auditoriumRepository.listAll(
+                        //Sort.by("label").and("id")
+                ),
+                this.timeslotRepository.listAll(
+                        //Sort.by("day").and("start").and("end").and("id")
+                ),
+                this.lectureRepository.listAll(
+                        //Sort.by("topic").and("lecturer").and("audience").and("id")
+                )
+        );
     }
 
     @Transactional
@@ -65,6 +89,6 @@ public class BillboardResource {
     }
 
     public SolverStatus getSolverStatus() {
-        return null;
+        return this.billboardSolverManager.getSolverStatus(SINGLETON_TIME_TABLE_ID);
     }
 }
