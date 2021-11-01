@@ -9,18 +9,20 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.quarkus:quarkus-jdbc-h2'
-    implementation 'io.quarkus:quarkus-hibernate-orm-panache'
-    implementation 'io.quarkus:quarkus-hibernate-orm-rest-data-panache'
+    implementation("io.quarkus:quarkus-jdbc-h2:${quarkusPlatformVersion}")
+    implementation("io.quarkus:quarkus-hibernate-orm-panache:${quarkusPlatformVersion}")
+    implementation("io.quarkus:quarkus-hibernate-orm-rest-data-panache:${quarkusPlatformVersion}")
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation enforcedPlatform("${quarkusPlatformGroupId}:quarkus-optaplanner-bom:${quarkusPlatformVersion}")
-    implementation 'org.optaplanner:optaplanner-quarkus'
-    implementation 'org.optaplanner:optaplanner-quarkus-jackson'
-    implementation 'io.quarkus:quarkus-resteasy-jackson'
-    implementation 'io.quarkus:quarkus-resteasy'
-    implementation 'io.quarkus:quarkus-arc'
-    testImplementation 'io.quarkus:quarkus-junit5'
-    testImplementation 'io.rest-assured:rest-assured'
+    implementation("org.optaplanner:optaplanner-quarkus:8.12.0.Final")
+    implementation("org.optaplanner:optaplanner-quarkus-jackson:8.12.0.Final")
+    implementation("org.optaplanner:optaplanner-benchmark:8.12.0.Final")
+    implementation("io.quarkus:quarkus-resteasy-jackson:${quarkusPlatformVersion}")
+    implementation("io.quarkus:quarkus-resteasy:${quarkusPlatformVersion}")
+    implementation("io.quarkus:quarkus-arc:${quarkusPlatformVersion}")
+    testImplementation("io.quarkus:quarkus-junit5:${quarkusPlatformVersion}")
+    testImplementation("io.rest-assured:rest-assured:4.4.0")
+    testImplementation("org.optaplanner:optaplanner-test:8.12.0.Final")
 }
 
 group 'local.mocaccino'
