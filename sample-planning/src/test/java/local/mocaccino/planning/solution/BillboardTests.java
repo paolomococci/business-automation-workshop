@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static io.restassured.RestAssured.given;
 
 @QuarkusTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -16,6 +16,6 @@ public class BillboardTests {
     @Test
     @Order(1)
     public void resourceExistingTest() {
-        assertTrue(true);
+        //given().when().get("/billboard").then().statusCode(200);
     }
 }
