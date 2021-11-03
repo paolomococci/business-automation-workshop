@@ -95,13 +95,13 @@ timeslots
 ```text
 create sequence hibernate_sequence start with 1 increment by 1;
 
-    create table Auditorium (
+    create table AUDITORIUM (
        id bigint not null,
         label varchar(255),
         primary key (id)
     );
 
-    create table Lecture (
+    create table LECTURE (
        id bigint not null,
         audience varchar(255),
         lecturer varchar(255),
@@ -111,22 +111,22 @@ create sequence hibernate_sequence start with 1 increment by 1;
         primary key (id)
     );
 
-    create table Timeslot (
+    create table TIMESLOT (
        id bigint not null,
-        day integer,
-        end time,
-        start time,
+        dayOfWeek integer,
+        localTimeStart time,
+        localTimeStop time,
         primary key (id)
     );
 
-    alter table Lecture 
-       add constraint FKir92pa4uji382nhkmra8hrwrv 
+    alter table LECTURE 
+       add constraint FKh1oyowty83akc1me1n3ngjh8g 
        foreign key (auditorium_id) 
-       references Auditorium;
+       references AUDITORIUM;
 
-    alter table Lecture 
-       add constraint FK227sgncixbwbdy3kan7rsit32 
+    alter table LECTURE 
+       add constraint FK16s9cr10puw80189u5lbtlfvv 
        foreign key (timeslot_id) 
-       references Timeslot;
+       references TIMESLOT;
 
 ```

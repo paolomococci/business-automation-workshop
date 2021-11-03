@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-@Entity
+@Entity(name = "TIMESLOT")
 public class Timeslot {
 
     @PlanningId
@@ -16,43 +16,31 @@ public class Timeslot {
     @GeneratedValue
     private Long id;
 
-    private DayOfWeek day;
-    private LocalTime start;
-    private LocalTime end;
+    private DayOfWeek dayOfWeek;
+    private LocalTime localTimeStart;
+    private LocalTime localTimeStop;
 
     public Timeslot() {
     }
 
     public Timeslot(
-            DayOfWeek day,
-            LocalTime start,
-            LocalTime end
+            DayOfWeek dayOfWeek,
+            LocalTime localTimeStart,
+            LocalTime localTimeStop
     ) {
-        this.day = day;
-        this.start = start;
-        this.end = end;
+        this.dayOfWeek = dayOfWeek;
+        this.localTimeStart = localTimeStart;
+        this.localTimeStop = localTimeStop;
     }
 
     public Timeslot(
             Long id,
-            DayOfWeek day,
-            LocalTime start
+            DayOfWeek dayOfWeek,
+            LocalTime localTimeStart
     ) {
         this.id = id;
-        this.day = day;
-        this.start = start;
-    }
-
-    public Timeslot(
-            Long id,
-            DayOfWeek day,
-            LocalTime start,
-            LocalTime end
-    ) {
-        this.id = id;
-        this.day = day;
-        this.start = start;
-        this.end = end;
+        this.dayOfWeek = dayOfWeek;
+        this.localTimeStart = localTimeStart;
     }
 
     public Long getId() {
@@ -63,37 +51,36 @@ public class Timeslot {
         this.id = id;
     }
 
-    public DayOfWeek getDay() {
-        return day;
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setDay(DayOfWeek day) {
-        this.day = day;
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
-    public LocalTime getStart() {
-        return start;
+    public LocalTime getLocalTimeStart() {
+        return localTimeStart;
     }
 
-    public void setStart(LocalTime start) {
-        this.start = start;
+    public void setLocalTimeStart(LocalTime localTimeStart) {
+        this.localTimeStart = localTimeStart;
     }
 
-    public LocalTime getEnd() {
-        return end;
+    public LocalTime getLocalTimeStop() {
+        return localTimeStop;
     }
 
-    public void setEnd(LocalTime end) {
-        this.end = end;
+    public void setLocalTimeStop(LocalTime localTimeStop) {
+        this.localTimeStop = localTimeStop;
     }
 
     @Override
     public String toString() {
         return "Timeslot{" +
-                "id=" + id +
-                ", day=" + day +
-                ", start=" + start +
-                ", end=" + end +
+                "dayOfWeek=" + dayOfWeek +
+                ", localTimeStart=" + localTimeStart +
+                ", localTimeStop=" + localTimeStop +
                 '}';
     }
 }

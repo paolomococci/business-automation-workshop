@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "AUDITORIUM")
 public class Auditorium {
 
     @PlanningId
@@ -47,7 +47,6 @@ public class Auditorium {
     @Override
     public String toString() {
         return "Auditorium{" +
-                "id=" + id +
                 ", label='" + label + '\'' +
                 '}';
     }

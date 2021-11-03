@@ -35,13 +35,9 @@ public class Billboard {
     public Billboard() {
     }
 
-    public Billboard(
-            List<Auditorium> auditoriums,
-            List<Timeslot> timeslots,
-            List<Lecture> lectures
-    ) {
-        this.auditoriums = auditoriums;
+    public Billboard(List<Timeslot> timeslots, List<Auditorium> auditoriums, List<Lecture> lectures) {
         this.timeslots = timeslots;
+        this.auditoriums = auditoriums;
         this.lectures = lectures;
     }
 

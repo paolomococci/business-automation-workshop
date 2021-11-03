@@ -17,10 +17,4 @@ public class TimeslotEntityTests {
         Timeslot timeslot = new Timeslot(DayOfWeek.MONDAY, LocalTime.now(), LocalTime.now().plusMinutes(40));
         assertFalse(timeslot.getId() != null);
     }
-
-    @Test
-    public void constructorWithFourParametersTest() {
-        Timeslot timeslot = new Timeslot(1L, DayOfWeek.MONDAY, LocalTime.now(), null);
-        assertTrue(timeslot.getId() != null);
-    }
 }

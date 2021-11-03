@@ -98,12 +98,12 @@ public class BillboardConstraintProvider
                 .join(
                     Lecture.class,
                     Joiners.equal(Lecture::getLecturer),
-                    Joiners.equal((lecture) -> lecture.getTimeslot().getDay()))
+                    Joiners.equal((lecture) -> lecture.getTimeslot().getDayOfWeek()))
                 .filter(
                     (lecture1, lecture2) -> {
                         Duration duration = Duration.between(
-                                lecture1.getTimeslot().getEnd(),
-                                lecture2.getTimeslot().getStart()
+                                lecture1.getTimeslot().getLocalTimeStop(),
+                                lecture2.getTimeslot().getLocalTimeStart()
                         );
                         return !duration.isNegative() && duration.compareTo(Duration.ofMinutes(30)) <= 0;
                     }
@@ -123,12 +123,12 @@ public class BillboardConstraintProvider
                     Lecture.class,
                     Joiners.equal(Lecture::getTopic),
                     Joiners.equal(Lecture::getAudience),
-                    Joiners.equal((lecture) -> lecture.getTimeslot().getDay()))
+                    Joiners.equal((lecture) -> lecture.getTimeslot().getDayOfWeek()))
                 .filter(
                     (lecture1, lecture2) -> {
                         Duration duration = Duration.between(
-                                lecture1.getTimeslot().getEnd(),
-                                lecture2.getTimeslot().getStart()
+                                lecture1.getTimeslot().getLocalTimeStop(),
+                                lecture2.getTimeslot().getLocalTimeStart()
                         );
                         return !duration.isNegative() && duration.compareTo(Duration.ofMinutes(30)) <= 0;
                     }

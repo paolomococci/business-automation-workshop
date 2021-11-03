@@ -71,14 +71,21 @@ public class BillboardResource {
             throw new IllegalStateException("There is no billboard with id (" + id + ").");
         }
         return new Billboard(
-                this.auditoriumRepository.listAll(
-                        Sort.by("label").and("id")
-                ),
                 this.timeslotRepository.listAll(
-                        Sort.by("day").and("start").and("end").and("id")
+                        Sort.by("dayOfWeek")
+                                .and("localTimeStart")
+                                .and("localTimeStop")
+                                .and("id")
+                ),
+                this.auditoriumRepository.listAll(
+                        Sort.by("label")
+                                .and("id")
                 ),
                 this.lectureRepository.listAll(
-                        Sort.by("topic").and("lecturer").and("audience").and("id")
+                        Sort.by("topic")
+                                .and("lecturer")
+                                .and("audience")
+                                .and("id")
                 )
         );
     }
