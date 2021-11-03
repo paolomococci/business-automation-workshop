@@ -47,7 +47,7 @@ public class DataDemoSetUp {
         }
 
         // timeslot
-        List<Timeslot> timeslots = new ArrayList<>(10);
+        List<Timeslot> timeslots = new ArrayList<>();
         // MONDAY
         timeslots.add(new Timeslot(DayOfWeek.MONDAY, LocalTime.of(8, 30), LocalTime.of(9, 20)));
         timeslots.add(new Timeslot(DayOfWeek.MONDAY, LocalTime.of(9, 30), LocalTime.of(10, 20)));
@@ -93,7 +93,7 @@ public class DataDemoSetUp {
         this.timeslotRepository.persist(timeslots);
 
         // auditorium
-        List<Auditorium> auditoriums = new ArrayList<>(3);
+        List<Auditorium> auditoriums = new ArrayList<>();
         auditoriums.add(new Auditorium("Peyton Randolph"));
         auditoriums.add(new Auditorium("John Hancock"));
         auditoriums.add(new Auditorium("Benjamin Franklin"));
@@ -113,7 +113,7 @@ public class DataDemoSetUp {
         // lectures.add(new Lecture("historical figures", "lecturer", "audience"));
         List<Lecture> lectures = new ArrayList<>();
 
-        // first: Prelude
+        // first: prelude
         lectures.add(new Lecture("Peyton Randolph", "Alan Arisen", "prelude"));
         lectures.add(new Lecture("John Hancock", "Alan Arisen", "prelude"));
         lectures.add(new Lecture("Benjamin Franklin", "Amy Built", "prelude"));
