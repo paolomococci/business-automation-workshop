@@ -11,3 +11,9 @@ mvn io.quarkus.platform:quarkus-maven-plugin:2.4.0.Final:create -DprojectGroupId
 ```shell
 ./gradlew addExtension --extensions="quarkus-jdbc-h2,quarkus-hibernate-orm-panache,quarkus-hibernate-orm-rest-data-panache"
 ```
+
+## to start the application in development mode
+
+```shell
+./gradlew quarkusDev
+```
