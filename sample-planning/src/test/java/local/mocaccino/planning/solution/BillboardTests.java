@@ -16,6 +16,6 @@ public class BillboardTests {
     @Test
     @Order(1)
     public void resourceExistingTest() {
-        //given().when().get("/billboard").then().statusCode(200);
+        given().when().get("/billboard").then().statusCode(200);
     }
 }

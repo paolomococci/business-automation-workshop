@@ -13,7 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @QuarkusTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -24,7 +24,7 @@ public class TimeslotResourceTests {
     public void resourceExistingTest() {
         List<Timeslot> timeslots = given().when().get("/timeslots")
                 .then().statusCode(200).extract().body().jsonPath().getList(".", Timeslot.class);
-        assertTrue(timeslots.isEmpty());
+        assertFalse(timeslots.isEmpty());
     }
 
     @Test
