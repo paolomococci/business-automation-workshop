@@ -45,3 +45,15 @@ mvnw.cmd
 out.log
 README.txt
 HELP.md
+
+# Vaadin, everything that is generated automatically
+node_modules
+pnpm-lock.yaml
+frontend/generated
+.npmrc
+package.json
+pnpmfile.js
+tsconfig.json
+types.d.ts
+webpack.config.js
+webpack.generated.js
