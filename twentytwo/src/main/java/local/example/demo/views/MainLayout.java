@@ -24,7 +24,7 @@ import local.example.demo.views.address.AddressFormView;
 import local.example.demo.views.address.AddressesDetailView;
 import local.example.demo.views.book.BooksDetailView;
 import local.example.demo.views.customer.CustomersDetailView;
-import local.example.demo.views.customer.CustomersFormView;
+import local.example.demo.views.customer.CustomerFormView;
 import local.example.demo.views.home.HomeView;
 import local.example.demo.views.kpi.KeyPerformanceIndicatorView;
 
@@ -176,7 +176,7 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo(
                     "Customer Form", 
                     "la la-user", 
-                    CustomersFormView.class
+                    CustomerFormView.class
                 ), 
                 new MenuItemInfo(
                     "Customers Detail", 
