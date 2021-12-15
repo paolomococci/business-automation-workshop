@@ -28,7 +28,7 @@ public class BookFormView extends Div {
     private TextField title = new TextField("Title");
     private TextField author = new TextField("Author");
     private DatePicker publication = new DatePicker("Publication");
-    private TextField pages = new TextField("Pages");
+    //private NumberField pages = new NumberField("Pages");
     private TextField isbn = new TextField("Isbn");
 
     private Button cancel = new Button("Cancel");
@@ -62,7 +62,12 @@ public class BookFormView extends Div {
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
         formLayout.add(title, 2);
-        formLayout.add(author, publication, pages, isbn);
+        formLayout.add(
+            author, 
+            publication, 
+            //pages, 
+            isbn
+        );
         return formLayout;
     }
 
