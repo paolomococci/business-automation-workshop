@@ -174,7 +174,7 @@ public class MainLayout extends AppLayout {
                     AddressesDetailView.class
                 ), 
                 new MenuItemInfo(
-                    "Customers Form", 
+                    "Customer Form", 
                     "la la-user", 
                     CustomersFormView.class
                 ), 
@@ -183,6 +183,11 @@ public class MainLayout extends AppLayout {
                     "la la-users-cog", 
                     CustomersDetailView.class
                 ), 
+                new MenuItemInfo(
+                    "Book Form", 
+                    "la la-open-book", 
+                    BooksDetailView.class
+                ),   
                 new MenuItemInfo(
                     "Books Detail", 
                     "la la-open-book", 
