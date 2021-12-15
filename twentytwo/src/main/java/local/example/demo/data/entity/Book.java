@@ -1,7 +1,16 @@
 package local.example.demo.data.entity;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 import local.example.demo.data.AbstractEntity;
 
 @Entity
@@ -13,6 +22,20 @@ public class Book extends AbstractEntity {
     private Integer pages;
     private String isbn;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "book_customer",
+        joinColumns = { @JoinColumn(name = "book_id") },
+        inverseJoinColumns = { @JoinColumn(name = "customer_id") }
+    )
+    private List<Customer> bookCustomer = new LinkedList<>();
+
+    public List<Customer> getCustomers() {
+        return bookCustomer;
+    }
+    public void setCustomers(List<Customer> bookCustomer) {
+        this.bookCustomer = bookCustomer;
+    }
     public String getTitle() {
         return title;
     }
