@@ -41,7 +41,7 @@ public class CustomersFormView extends Div {
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-    private Binder<Customer> binder = new Binder<>(Customer.class);
+    private Binder<Customer> customerBinder = new Binder<>(Customer.class);
 
     public CustomersFormView(CustomerService customerService) {
         addClassName("customers-form-view");
@@ -50,19 +50,19 @@ public class CustomersFormView extends Div {
         add(createFormLayout());
         add(createButtonLayout());
 
-        binder.bindInstanceFields(this);
+        customerBinder.bindInstanceFields(this);
         clearForm();
 
         cancel.addClickListener(e -> clearForm());
         save.addClickListener(e -> {
-            customerService.update(binder.getBean());
-            Notification.show(binder.getBean().getClass().getSimpleName() + " details stored!");
+            customerService.update(customerBinder.getBean());
+            Notification.show(customerBinder.getBean().getClass().getSimpleName() + " details stored!");
             clearForm();
         });
     }
 
     private void clearForm() {
-        binder.setBean(new Customer());
+        customerBinder.setBean(new Customer());
     }
 
     private Component createTitle() {
