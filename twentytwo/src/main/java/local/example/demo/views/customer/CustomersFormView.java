@@ -18,7 +18,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
 import javax.annotation.security.RolesAllowed;
+
 import local.example.demo.data.entity.Customer;
 import local.example.demo.data.service.CustomerService;
 import local.example.demo.views.MainLayout;
