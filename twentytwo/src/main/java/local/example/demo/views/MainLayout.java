@@ -185,7 +185,7 @@ public class MainLayout extends AppLayout {
                 ), 
                 new MenuItemInfo(
                     "Book Form", 
-                    "la la-open-book", 
+                    "la la-book", 
                     BooksDetailView.class
                 ),   
                 new MenuItemInfo(
