@@ -158,7 +158,13 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
         city = new TextField("City");
         state = new TextField("State");
         country = new TextField("Country");
-        Component[] fields = new Component[]{street, postalCode, city, state, country};
+        Component[] fields = new Component[] {
+            street, 
+            postalCode, 
+            city, 
+            state, 
+            country
+        };
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
@@ -202,6 +208,5 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
     private void populateForm(Address value) {
         this.address = value;
         addressBinder.readBean(this.address);
-
     }
 }
