@@ -15,13 +15,16 @@ import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import local.example.demo.data.entity.User;
 import local.example.demo.security.AuthenticatedUser;
 import local.example.demo.views.address.AddressFormView;
 import local.example.demo.views.address.AddressesDetailView;
+import local.example.demo.views.book.BookFormView;
 import local.example.demo.views.book.BooksDetailView;
 import local.example.demo.views.customer.CustomersDetailView;
 import local.example.demo.views.customer.CustomerFormView;
@@ -186,7 +189,7 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo(
                     "Book Form", 
                     "la la-book", 
-                    BooksDetailView.class
+                    BookFormView.class
                 ),   
                 new MenuItemInfo(
                     "Books Detail", 
