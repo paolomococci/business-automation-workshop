@@ -25,7 +25,7 @@ import local.example.demo.data.entity.Customer;
 import local.example.demo.data.service.CustomerService;
 import local.example.demo.views.MainLayout;
 
-@PageTitle("Customers Form")
+@PageTitle("Customer Form")
 @Route(value = "customer-form", layout = MainLayout.class)
 @RolesAllowed("user")
 @Uses(Icon.class)
