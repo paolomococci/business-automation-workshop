@@ -34,7 +34,7 @@ public class AddressFormView extends Div {
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-    private Binder<Address> binder = new Binder<>(Address.class);
+    private Binder<Address> addressBinder = new Binder<>(Address.class);
 
     public AddressFormView(AddressService addressService) {
         addClassName("address-form-view");
@@ -43,14 +43,14 @@ public class AddressFormView extends Div {
         add(createFormLayout());
         add(createButtonLayout());
 
-        binder.bindInstanceFields(this);
+        addressBinder.bindInstanceFields(this);
 
         clearForm();
 
         cancel.addClickListener(e -> clearForm());
         save.addClickListener(e -> {
-            addressService.update(binder.getBean());
-            Notification.show(binder.getBean().getClass().getSimpleName() + " stored!");
+            addressService.update(addressBinder.getBean());
+            Notification.show(addressBinder.getBean().getClass().getSimpleName() + " stored!");
             clearForm();
         });
     }
@@ -80,6 +80,6 @@ public class AddressFormView extends Div {
     }
 
     private void clearForm() {
-        this.binder.setBean(new Address());
+        this.addressBinder.setBean(new Address());
     }
 }
