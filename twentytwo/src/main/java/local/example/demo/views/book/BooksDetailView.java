@@ -49,7 +49,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-    private BeanValidationBinder<Book> binder;
+    private BeanValidationBinder<Book> bookBinder;
 
     private Book book;
 
@@ -98,13 +98,13 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
             }
         });
 
-        binder = new BeanValidationBinder<>(Book.class);
+        bookBinder = new BeanValidationBinder<>(Book.class);
 
-        binder.forField(pages).withConverter(
+        bookBinder.forField(pages).withConverter(
             new StringToIntegerConverter("Only numbers are allowed")
         ).bind("pages");
 
-        binder.bindInstanceFields(this);
+        bookBinder.bindInstanceFields(this);
 
         cancel.addClickListener(e -> {
             clearForm();
@@ -116,7 +116,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
                 if (this.book == null) {
                     this.book = new Book();
                 }
-                binder.writeBean(this.book);
+                bookBinder.writeBean(this.book);
 
                 bookService.update(this.book);
                 clearForm();
@@ -214,6 +214,6 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
     private void populateForm(Book value) {
         this.book = value;
-        binder.readBean(this.book);
+        bookBinder.readBean(this.book);
     }
 }
