@@ -197,7 +197,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
     private void createGridLayout(SplitLayout splitLayout) {
         Div wrapper = new Div();
-        wrapper.setId("bookGrid-wrapper");
+        wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
         wrapper.add(bookGrid);
