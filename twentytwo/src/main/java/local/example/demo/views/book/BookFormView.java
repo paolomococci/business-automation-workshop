@@ -11,6 +11,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
@@ -28,7 +29,7 @@ public class BookFormView extends Div {
     private TextField title = new TextField("Title");
     private TextField author = new TextField("Author");
     private DatePicker publication = new DatePicker("Publication");
-    //private NumberField pages = new NumberField("Pages");
+    private IntegerField pages = new IntegerField("Pages");
     private TextField isbn = new TextField("Isbn");
 
     private Button cancel = new Button("Cancel");
@@ -65,7 +66,7 @@ public class BookFormView extends Div {
         formLayout.add(
             author, 
             publication, 
-            //pages, 
+            pages, 
             isbn
         );
         return formLayout;
