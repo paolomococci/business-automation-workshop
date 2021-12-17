@@ -25,16 +25,16 @@ import local.example.demo.views.MainLayout;
 @RolesAllowed("user")
 public class AddressFormView extends Div {
 
-    private TextField street = new TextField("Street address");
-    private TextField postalCode = new TextField("Postal code");
-    private TextField city = new TextField("City");
-    private ComboBox<String> state = new ComboBox<>("State");
-    private ComboBox<String> country = new ComboBox<>("Country");
+    private final TextField street = new TextField("Street address");
+    private final TextField postalCode = new TextField("Postal code");
+    private final TextField city = new TextField("City");
+    private final ComboBox<String> state = new ComboBox<>("State");
+    private final ComboBox<String> country = new ComboBox<>("Country");
 
-    private Button cancel = new Button("Cancel");
-    private Button save = new Button("Save");
+    private final Button cancel = new Button("Cancel");
+    private final Button save = new Button("Save");
 
-    private Binder<Address> addressBinder = new Binder<>(Address.class);
+    private final Binder<Address> addressBinder = new Binder<>(Address.class);
 
     public AddressFormView(AddressService addressService) {
         addClassName("address-form-view");
