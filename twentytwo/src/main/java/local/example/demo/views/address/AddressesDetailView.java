@@ -37,25 +37,18 @@ import org.springframework.data.domain.PageRequest;
 @RolesAllowed("admin")
 public class AddressesDetailView extends Div implements BeforeEnterObserver {
 
-    private final String ADDRESS_ID = "addressID";
     private final String ADDRESS_EDIT_ROUTE_TEMPLATE = "address-detail/%d/edit";
 
-    private Grid<Address> addressGrid = new Grid<>(Address.class, false);
+    private final Grid<Address> addressGrid = new Grid<>(Address.class, false);
 
-    private TextField street;
-    private TextField postalCode;
-    private TextField city;
-    private TextField state;
-    private TextField country;
+    private final Button cancel = new Button("Cancel");
+    private final Button save = new Button("Save");
 
-    private Button cancel = new Button("Cancel");
-    private Button save = new Button("Save");
-
-    private BeanValidationBinder<Address> addressBinder;
+    private final BeanValidationBinder<Address> addressBinder;
 
     private Address address;
 
-    private AddressService addressService;
+    private final AddressService addressService;
 
     public AddressesDetailView(@Autowired AddressService addressService) {
         this.addressService = addressService;
@@ -129,6 +122,7 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
+        String ADDRESS_ID = "addressID";
         Optional<Integer> addressId = event.getRouteParameters().getInteger(ADDRESS_ID);
         if (addressId.isPresent()) {
             Optional<Address> addressFromBackend = addressService.get(addressId.get());
@@ -153,17 +147,17 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        street = new TextField("Street");
-        postalCode = new TextField("Postal Code");
-        city = new TextField("City");
-        state = new TextField("State");
-        country = new TextField("Country");
+        TextField street = new TextField("Street");
+        TextField postalCode = new TextField("Postal Code");
+        TextField city = new TextField("City");
+        TextField state = new TextField("State");
+        TextField country = new TextField("Country");
         Component[] fields = new Component[] {
-            street, 
-            postalCode, 
-            city, 
-            state, 
-            country
+                street,
+                postalCode,
+                city,
+                state,
+                country
         };
 
         for (Component field : fields) {
