@@ -31,17 +31,17 @@ import local.example.demo.views.MainLayout;
 @Uses(Icon.class)
 public class CustomerFormView extends Div {
 
-    private TextField firstName = new TextField("First name");
-    private TextField lastName = new TextField("Last name");
-    private EmailField email = new EmailField("Email address");
-    private DatePicker dateOfBirth = new DatePicker("Birthday");
-    private PhoneNumberField phone = new PhoneNumberField("Phone number");
-    private TextField occupation = new TextField("Occupation");
+    private final TextField firstName = new TextField("First name");
+    private final TextField lastName = new TextField("Last name");
+    private final EmailField email = new EmailField("Email address");
+    private final DatePicker dateOfBirth = new DatePicker("Birthday");
+    private final PhoneNumberField phone = new PhoneNumberField("Phone number");
+    private final TextField occupation = new TextField("Occupation");
 
-    private Button cancel = new Button("Cancel");
-    private Button save = new Button("Save");
+    private final Button cancel = new Button("Cancel");
+    private final Button save = new Button("Save");
 
-    private Binder<Customer> customerBinder = new Binder<>(Customer.class);
+    private final Binder<Customer> customerBinder = new Binder<>(Customer.class);
 
     public CustomerFormView(CustomerService customerService) {
         addClassName("customer-form-view");
@@ -93,8 +93,8 @@ public class CustomerFormView extends Div {
     }
 
     private static class PhoneNumberField extends CustomField<String> {
-        private ComboBox<String> countryCode = new ComboBox<>();
-        private TextField number = new TextField();
+        private final ComboBox<String> countryCode = new ComboBox<>();
+        private final TextField number = new TextField();
 
         public PhoneNumberField(String label) {
             setLabel(label);
@@ -114,8 +114,7 @@ public class CustomerFormView extends Div {
         @Override
         protected String generateModelValue() {
             if (countryCode.getValue() != null && number.getValue() != null) {
-                String s = countryCode.getValue() + " " + number.getValue();
-                return s;
+                return countryCode.getValue() + " " + number.getValue();
             }
             return "";
         }
