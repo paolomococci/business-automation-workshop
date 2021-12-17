@@ -26,16 +26,16 @@ import local.example.demo.views.MainLayout;
 @RolesAllowed("user")
 public class BookFormView extends Div {
 
-    private TextField title = new TextField("Title");
-    private TextField author = new TextField("Author");
-    private DatePicker publication = new DatePicker("Publication");
-    private IntegerField pages = new IntegerField("Pages");
-    private TextField isbn = new TextField("Isbn");
+    private final TextField title = new TextField("Title");
+    private final TextField author = new TextField("Author");
+    private final DatePicker publication = new DatePicker("Publication");
+    private final IntegerField pages = new IntegerField("Pages");
+    private final TextField isbn = new TextField("Isbn");
 
-    private Button cancel = new Button("Cancel");
-    private Button save = new Button("Save");
+    private final Button cancel = new Button("Cancel");
+    private final Button save = new Button("Save");
 
-    private Binder<Book> bookBinder = new Binder<>(Book.class);
+    private final Binder<Book> bookBinder = new Binder<>(Book.class);
 
     public BookFormView(BookService bookService) {
         addClassName("book-form-view");
