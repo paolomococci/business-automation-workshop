@@ -34,7 +34,6 @@ import org.springframework.data.domain.PageRequest;
 @RolesAllowed("admin")
 public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
-    private final String CUSTOMER_ID = "customerID";
     private final String CUSTOMER_EDIT_ROUTE_TEMPLATE = "customers-detail/%d/edit";
 
     private Grid<Customer> customerGrid = new Grid<>(Customer.class, false);
@@ -129,6 +128,7 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
+        String CUSTOMER_ID = "customerID";
         Optional<Integer> customerId = event.getRouteParameters().getInteger(CUSTOMER_ID);
         if (customerId.isPresent()) {
             Optional<Customer> customerFromBackend = customerService.get(customerId.get());
