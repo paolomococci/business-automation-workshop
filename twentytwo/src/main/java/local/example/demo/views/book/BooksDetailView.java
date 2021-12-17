@@ -35,7 +35,6 @@ import org.springframework.data.domain.PageRequest;
 @RolesAllowed("admin")
 public class BooksDetailView extends Div implements BeforeEnterObserver {
 
-    private final String BOOK_ID = "bookID";
     private final String BOOK_EDIT_ROUTE_TEMPLATE = "books-detail/%d/edit";
 
     private Grid<Book> bookGrid = new Grid<>(Book.class, false);
@@ -132,6 +131,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
+        String BOOK_ID = "bookID";
         Optional<Integer> bookId = event.getRouteParameters().getInteger(BOOK_ID);
         if (bookId.isPresent()) {
             Optional<Book> bookFromBackend = bookService.get(bookId.get());
