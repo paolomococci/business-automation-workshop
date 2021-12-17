@@ -44,7 +44,7 @@ public class CustomerFormView extends Div {
     private Binder<Customer> customerBinder = new Binder<>(Customer.class);
 
     public CustomerFormView(CustomerService customerService) {
-        addClassName("customers-form-view");
+        addClassName("customer-form-view");
 
         add(createTitle());
         add(createFormLayout());
@@ -72,7 +72,14 @@ public class CustomerFormView extends Div {
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
         email.setErrorMessage("Please enter a valid email address");
-        formLayout.add(firstName, lastName, dateOfBirth, phone, email, occupation);
+        formLayout.add(
+                firstName,
+                lastName,
+                dateOfBirth,
+                phone,
+                email,
+                occupation
+        );
         return formLayout;
     }
 
