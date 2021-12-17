@@ -1,10 +1,10 @@
-.customers-form-view {
+.customer-form-view {
   display: block;
   margin: 0 auto;
   max-width: 1024px;
   padding: 0 var(--lumo-space-l);
 }
-.customers-form-view .button-layout {
+.customer-form-view .button-layout {
   margin-bottom: var(--lumo-space-l);
   margin-top: var(--lumo-space-m);
 }
