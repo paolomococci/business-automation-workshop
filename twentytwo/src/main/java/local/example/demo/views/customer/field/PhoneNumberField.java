@@ -20,9 +20,9 @@ public class PhoneNumberField extends CustomField<String> {
         countryCode.addCustomValueSetListener(e -> countryCode.setValue(e.getDetail()));
         number.setPattern("\\d*");
         number.setPreventInvalidInput(true);
-        HorizontalLayout layout = new HorizontalLayout(countryCode, number);
-        layout.setFlexGrow(1.0, number);
-        add(layout);
+        HorizontalLayout horizontalLayout = new HorizontalLayout(countryCode, number);
+        horizontalLayout.setFlexGrow(1.0, number);
+        add(horizontalLayout);
     }
 
     @Override
