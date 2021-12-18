@@ -12,12 +12,12 @@ public class BookField extends CustomField<Book> {
     @Autowired
     BookService bookService;
 
-    private final ComboBox<String> book = new ComboBox<>();
+    private final ComboBox<Book> book = new ComboBox<>();
 
     public BookField(String label) {
         setLabel(label);
         this.book.setPlaceholder("Book");
-        this.book.setItems();
+        this.book.setItems(this.bookService.list());
         HorizontalLayout horizontalLayout = new HorizontalLayout(this.book);
         horizontalLayout.setFlexGrow(1.0, this.book);
         add(horizontalLayout);
