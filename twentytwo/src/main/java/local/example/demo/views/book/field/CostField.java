@@ -50,11 +50,15 @@ public class CostField extends CustomField<Cost> {
 
     @Override
     protected Cost generateModelValue() {
-        return null;
+        return new Cost(
+                this.amount.getValue(),
+                this.currency.getValue()
+        );
     }
 
     @Override
     protected void setPresentationValue(Cost cost) {
-
+        this.amount.setValue(cost.getAmount());
+        this.currency.setValue(cost.getCurrency());
     }
 }
