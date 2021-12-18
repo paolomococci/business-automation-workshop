@@ -37,6 +37,9 @@ import org.springframework.data.domain.PageRequest;
 @RolesAllowed("admin")
 public class AddressesDetailView extends Div implements BeforeEnterObserver {
 
+    @Autowired
+    AddressService addressService;
+
     private final String ADDRESS_EDIT_ROUTE_TEMPLATE = "address-detail/%d/edit";
 
     private final Grid<Address> addressGrid = new Grid<>(Address.class, false);
@@ -54,10 +57,7 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
 
     private Address address;
 
-    private final AddressService addressService;
-
-    public AddressesDetailView(@Autowired AddressService addressService) {
-        this.addressService = addressService;
+    public AddressesDetailView() {
         addClassNames(
             "addresses-detail-view", 
             "flex", 
