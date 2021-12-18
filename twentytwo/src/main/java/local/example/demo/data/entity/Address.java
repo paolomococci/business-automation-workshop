@@ -57,4 +57,15 @@ public class Address extends AbstractEntity {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return String.join(
+                this.street, " ",
+                this.city, " ",
+                this.postalCode, " ",
+                this.state, " ",
+                this.country
+        );
+    }
 }
