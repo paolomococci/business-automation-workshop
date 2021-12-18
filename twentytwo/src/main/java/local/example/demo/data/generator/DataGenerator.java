@@ -60,10 +60,10 @@ public class DataGenerator {
 
             /* administrator user */
             User admin = new User();
-            admin.setName("Jenny Doe");
-            admin.setUsername("jennydoe");
+            admin.setName("Amy Doe");
+            admin.setUsername("amydoe");
             admin.setHashedPassword(
-                passwordEncoder.encode("jennydoe")
+                passwordEncoder.encode("amydoe")
             );
             admin.setProfilePictureUrl(null);
             admin.setRoles(Stream.of(Role.USER, Role.ADMIN).collect(Collectors.toSet()));
