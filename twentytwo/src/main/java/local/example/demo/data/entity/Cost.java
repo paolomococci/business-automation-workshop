@@ -2,6 +2,9 @@ package local.example.demo.data.entity;
 
 import local.example.demo.data.AbstractEntity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Cost extends AbstractEntity {
 
     private String amount;
