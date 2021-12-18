@@ -73,20 +73,22 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
-        addressGrid.addColumn("street").setAutoWidth(true);
-        addressGrid.addColumn("postalCode").setAutoWidth(true);
-        addressGrid.addColumn("city").setAutoWidth(true);
-        addressGrid.addColumn("state").setAutoWidth(true);
-        addressGrid.addColumn("country").setAutoWidth(true);
-        addressGrid.setItems(query -> addressService.list(
+        this.addressGrid.addColumn(Address::getStreet).setAutoWidth(true);
+        this.addressGrid.addColumn(Address::getPostalCode).setAutoWidth(true);
+        this.addressGrid.addColumn(Address::getCity).setAutoWidth(true);
+        this.addressGrid.addColumn(Address::getCity).setAutoWidth(true);
+        this.addressGrid.addColumn(Address::getCountry).setAutoWidth(true);
+
+        this.addressGrid.setItems(query -> this.addressService.list(
                 PageRequest.of(query.getPage(), 
                 query.getPageSize(), 
                 VaadinSpringDataHelpers.toSpringDataSort(query)))
                 .stream());
-        addressGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
-        addressGrid.setHeightFull();
 
-        addressGrid.asSingleSelect().addValueChangeListener(event -> {
+        this.addressGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
+        this.addressGrid.setHeightFull();
+
+        this.addressGrid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 UI.getCurrent().navigate(
                     String.format(ADDRESS_EDIT_ROUTE_TEMPLATE, 
@@ -98,23 +100,23 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
             }
         });
 
-        addressBinder = new BeanValidationBinder<>(Address.class);
+        this.addressBinder = new BeanValidationBinder<>(Address.class);
 
-        addressBinder.bindInstanceFields(this);
+        this.addressBinder.bindInstanceFields(this);
 
-        cancel.addClickListener(e -> {
+        this.cancel.addClickListener(e -> {
             clearForm();
             refreshGrid();
         });
 
-        save.addClickListener(e -> {
+        this.save.addClickListener(e -> {
             try {
                 if (this.address == null) {
                     this.address = new Address();
                 }
-                addressBinder.writeBean(this.address);
+                this.addressBinder.writeBean(this.address);
 
-                addressService.update(this.address);
+                this.addressService.update(this.address);
                 clearForm();
                 refreshGrid();
                 Notification.show("Address details stored!");
@@ -153,17 +155,17 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        street = new TextField("Street");
-        postalCode = new TextField("Postal Code");
-        city = new TextField("City");
-        state = new TextField("State");
-        country = new TextField("Country");
+        this.street = new TextField("Street");
+        this.postalCode = new TextField("Postal Code");
+        this.city = new TextField("City");
+        this.state = new TextField("State");
+        this.country = new TextField("Country");
         Component[] fields = new Component[] {
-            street,
-            postalCode,
-            city,
-            state,
-            country
+                this.street,
+                this.postalCode,
+                this.city,
+                this.state,
+                this.country
         };
 
         for (Component field : fields) {
@@ -182,9 +184,12 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
             "w-full flex-wrap bg-contrast-5 py-s px-l"
         );
         buttonLayout.setSpacing(true);
-        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonLayout.add(save, cancel);
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        buttonLayout.add(
+                this.save,
+                this.cancel
+        );
         editorLayoutDiv.add(buttonLayout);
     }
 
@@ -193,12 +198,12 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
         wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
-        wrapper.add(addressGrid);
+        wrapper.add(this.addressGrid);
     }
 
     private void refreshGrid() {
-        addressGrid.select(null);
-        addressGrid.getLazyDataView().refreshAll();
+        this.addressGrid.select(null);
+        this.addressGrid.getLazyDataView().refreshAll();
     }
 
     private void clearForm() {
@@ -207,6 +212,6 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
 
     private void populateForm(Address value) {
         this.address = value;
-        addressBinder.readBean(this.address);
+        this.addressBinder.readBean(this.address);
     }
 }
