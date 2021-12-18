@@ -19,8 +19,6 @@ import com.vaadin.flow.router.Route;
 import local.example.demo.data.entity.Customer;
 import local.example.demo.data.service.CustomerService;
 import local.example.demo.views.MainLayout;
-import local.example.demo.views.customer.field.AddressField;
-import local.example.demo.views.customer.field.BookField;
 import local.example.demo.views.customer.field.PhoneNumberField;
 
 import javax.annotation.security.RolesAllowed;
@@ -37,8 +35,6 @@ public class CustomerFormView extends Div {
     private final DatePicker dateOfBirth = new DatePicker("Birthday");
     private final PhoneNumberField phoneNumber = new PhoneNumberField("Phone number");
     private final TextField occupation = new TextField("Occupation");
-    private final AddressField address = new AddressField("Address");
-    private final BookField book = new BookField("Book");
 
     private final Button cancel = new Button("Cancel");
     private final Button save = new Button("Save");
@@ -80,9 +76,7 @@ public class CustomerFormView extends Div {
                 dateOfBirth,
                 phoneNumber,
                 email,
-                occupation,
-                address,
-                book
+                occupation
         );
         return formLayout;
     }
