@@ -22,11 +22,15 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
+
 import java.util.Optional;
+
 import javax.annotation.security.RolesAllowed;
+
 import local.example.demo.data.entity.Book;
 import local.example.demo.data.service.BookService;
 import local.example.demo.views.MainLayout;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
@@ -71,12 +75,11 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
-        this.bookGrid.addColumn("title").setAutoWidth(true);
-        this.bookGrid.addColumn("author").setAutoWidth(true);
-        this.bookGrid.addColumn("publication").setAutoWidth(true);
-        this.bookGrid.addColumn("pages").setAutoWidth(true);
-        this.bookGrid.addColumn("isbn").setAutoWidth(true);
-        this.bookGrid.addColumn("cost").setAutoWidth(true);
+        this.bookGrid.addColumn(Book::getTitle).setAutoWidth(true);
+        this.bookGrid.addColumn(Book::getAuthor).setAutoWidth(true);
+        this.bookGrid.addColumn(Book::getPublication).setAutoWidth(true);
+        this.bookGrid.addColumn(Book::getPages).setAutoWidth(true);
+        this.bookGrid.addColumn(Book::getIsbn).setAutoWidth(true);
 
         this.bookGrid.setItems(query -> this.bookService.list(
                 PageRequest.of(
