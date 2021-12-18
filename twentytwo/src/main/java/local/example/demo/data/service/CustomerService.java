@@ -12,11 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService {
 
-    private CustomerRepository customerRepository;
-
-    public CustomerService(@Autowired CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    @Autowired
+    CustomerRepository customerRepository;
 
     public Optional<Customer> get(Integer id) {
         return customerRepository.findById(id);
