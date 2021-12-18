@@ -7,6 +7,14 @@ public class Cost extends AbstractEntity {
     private String amount;
     private String currency;
 
+    public Cost(
+            String amount,
+            String currency
+    ) {
+        this.amount = amount;
+        this.currency = currency;
+    }
+
     public String getAmount() {
         return amount;
     }
