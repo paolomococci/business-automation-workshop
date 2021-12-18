@@ -1,5 +1,6 @@
 package local.example.demo.data.service;
 
+import java.util.List;
 import java.util.Optional;
 import local.example.demo.data.entity.Address;
 import local.example.demo.data.repository.AddressRepository;
@@ -28,6 +29,10 @@ public class AddressService {
 
     public void delete(Integer id) {
         addressRepository.deleteById(id);
+    }
+
+    public List<Address> list() {
+        return addressRepository.findAll();
     }
 
     public Page<Address> list(Pageable pageable) {
