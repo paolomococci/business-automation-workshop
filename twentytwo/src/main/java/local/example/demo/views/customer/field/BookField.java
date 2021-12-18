@@ -13,15 +13,14 @@ public class BookField extends CustomField<Book> {
     @Autowired
     BookService bookService;
 
-    private final ComboBox<Book> book = new ComboBox<>();
-
     public BookField(String label) {
         setLabel(label);
-        this.book.setPlaceholder("Book");
-        this.book.setRenderer(new TextRenderer<>(entity -> entity.getTitle()));
-        this.book.setItems(this.bookService.list());
-        HorizontalLayout horizontalLayout = new HorizontalLayout(this.book);
-        horizontalLayout.setFlexGrow(1.0, this.book);
+        ComboBox<Book> book = new ComboBox<>();
+        book.setPlaceholder("Book");
+        book.setRenderer(new TextRenderer<>(Book::getTitle));
+        book.setItems(this.bookService.list());
+        HorizontalLayout horizontalLayout = new HorizontalLayout(book);
+        horizontalLayout.setFlexGrow(1.0, book);
         add(horizontalLayout);
     }
 
