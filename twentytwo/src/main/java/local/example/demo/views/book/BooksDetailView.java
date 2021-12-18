@@ -37,7 +37,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
     private final String BOOK_EDIT_ROUTE_TEMPLATE = "books-detail/%d/edit";
 
-    private Grid<Book> bookGrid = new Grid<>(Book.class, false);
+    private final Grid<Book> bookGrid = new Grid<>(Book.class, false);
 
     private TextField title;
     private TextField author;
@@ -45,14 +45,14 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
     private TextField pages;
     private TextField isbn;
 
-    private Button cancel = new Button("Cancel");
-    private Button save = new Button("Save");
+    private final Button cancel = new Button("Cancel");
+    private final Button save = new Button("Save");
 
-    private BeanValidationBinder<Book> bookBinder;
+    private final BeanValidationBinder<Book> bookBinder;
 
     private Book book;
 
-    private BookService bookService;
+    private final BookService bookService;
 
     public BooksDetailView(@Autowired BookService bookService) {
         this.bookService = bookService;
@@ -71,22 +71,23 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
-        bookGrid.addColumn("title").setAutoWidth(true);
-        bookGrid.addColumn("author").setAutoWidth(true);
-        bookGrid.addColumn("publication").setAutoWidth(true);
-        bookGrid.addColumn("pages").setAutoWidth(true);
-        bookGrid.addColumn("isbn").setAutoWidth(true);
-        bookGrid.setItems(query -> bookService.list(
+        this.bookGrid.addColumn("title").setAutoWidth(true);
+        this.bookGrid.addColumn("author").setAutoWidth(true);
+        this.bookGrid.addColumn("publication").setAutoWidth(true);
+        this.bookGrid.addColumn("pages").setAutoWidth(true);
+        this.bookGrid.addColumn("isbn").setAutoWidth(true);
+        this.bookGrid.addColumn(Book::getCost).setAutoWidth(true);
+        this.bookGrid.setItems(query -> this.bookService.list(
                 PageRequest.of(
                     query.getPage(), 
                     query.getPageSize(), 
                     VaadinSpringDataHelpers.toSpringDataSort(query)
                 ))
                 .stream());
-        bookGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
-        bookGrid.setHeightFull();
+        this.bookGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
+        this.bookGrid.setHeightFull();
 
-        bookGrid.asSingleSelect().addValueChangeListener(event -> {
+        this.bookGrid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 UI.getCurrent().navigate(
                     String.format(BOOK_EDIT_ROUTE_TEMPLATE, event.getValue().getId())
@@ -97,27 +98,27 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
             }
         });
 
-        bookBinder = new BeanValidationBinder<>(Book.class);
+        this.bookBinder = new BeanValidationBinder<>(Book.class);
 
-        bookBinder.forField(pages).withConverter(
+        this.bookBinder.forField(this.pages).withConverter(
             new StringToIntegerConverter("Only numbers are allowed")
         ).bind("pages");
 
-        bookBinder.bindInstanceFields(this);
+        this.bookBinder.bindInstanceFields(this);
 
-        cancel.addClickListener(e -> {
+        this.cancel.addClickListener(e -> {
             clearForm();
             refreshGrid();
         });
 
-        save.addClickListener(e -> {
+        this.save.addClickListener(e -> {
             try {
                 if (this.book == null) {
                     this.book = new Book();
                 }
-                bookBinder.writeBean(this.book);
+                this.bookBinder.writeBean(this.book);
 
-                bookService.update(this.book);
+                this.bookService.update(this.book);
                 clearForm();
                 refreshGrid();
                 Notification.show("Book details stored!");
@@ -160,17 +161,17 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        title = new TextField("Title");
-        author = new TextField("Author");
-        publication = new DatePicker("Publication");
-        pages = new TextField("Pages");
-        isbn = new TextField("Isbn");
+        this.title = new TextField("Title");
+        this.author = new TextField("Author");
+        this.publication = new DatePicker("Publication");
+        this.pages = new TextField("Pages");
+        this.isbn = new TextField("Isbn");
         Component[] fields = new Component[] {
-            title, 
-            author, 
-            publication, 
-            pages, 
-            isbn
+                this.title,
+                this.author,
+                this.publication,
+                this.pages,
+                this.isbn
         };
 
         for (Component field : fields) {
@@ -189,9 +190,14 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
             "w-full flex-wrap bg-contrast-5 py-s px-l"
         );
         buttonLayout.setSpacing(true);
-        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonLayout.add(save, cancel);
+
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        buttonLayout.add(
+                this.save,
+                this.cancel
+        );
         editorLayoutDiv.add(buttonLayout);
     }
 
@@ -200,12 +206,12 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
         wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
-        wrapper.add(bookGrid);
+        wrapper.add(this.bookGrid);
     }
 
     private void refreshGrid() {
-        bookGrid.select(null);
-        bookGrid.getLazyDataView().refreshAll();
+        this.bookGrid.select(null);
+        this.bookGrid.getLazyDataView().refreshAll();
     }
 
     private void clearForm() {
@@ -214,6 +220,6 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
     private void populateForm(Book value) {
         this.book = value;
-        bookBinder.readBean(this.book);
+        this.bookBinder.readBean(this.book);
     }
 }
