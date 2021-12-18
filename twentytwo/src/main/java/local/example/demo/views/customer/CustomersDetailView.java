@@ -34,9 +34,12 @@ import org.springframework.data.domain.PageRequest;
 @RolesAllowed("admin")
 public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
+    @Autowired
+    CustomerService customerService;
+
     private final String CUSTOMER_EDIT_ROUTE_TEMPLATE = "customers-detail/%d/edit";
 
-    private Grid<Customer> customerGrid = new Grid<>(Customer.class, false);
+    private final Grid<Customer> customerGrid = new Grid<>(Customer.class, false);
 
     private TextField name;
     private TextField surname;
@@ -52,10 +55,7 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
     private Customer customer;
 
-    private CustomerService customerService;
-
-    public CustomersDetailView(@Autowired CustomerService customerService) {
-        this.customerService = customerService;
+    public CustomersDetailView() {
         addClassNames(
             "customers-detail-view", 
             "flex", 
@@ -71,12 +71,12 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
-        customerGrid.addColumn("name").setAutoWidth(true);
-        customerGrid.addColumn("surname").setAutoWidth(true);
-        customerGrid.addColumn("email").setAutoWidth(true);
-        customerGrid.addColumn("phone").setAutoWidth(true);
-        customerGrid.addColumn("birthday").setAutoWidth(true);
-        customerGrid.addColumn("occupation").setAutoWidth(true);
+        customerGrid.addColumn(Customer::getName).setAutoWidth(true);
+        customerGrid.addColumn(Customer::getSurname).setAutoWidth(true);
+        customerGrid.addColumn(Customer::getEmail).setAutoWidth(true);
+        customerGrid.addColumn(Customer::getPhone).setAutoWidth(true);
+        customerGrid.addColumn(Customer::getBirthday).setAutoWidth(true);
+        customerGrid.addColumn(Customer::getOccupation).setAutoWidth(true);
         customerGrid.setItems(query -> customerService.list(
                 PageRequest.of(
                     query.getPage(), 
