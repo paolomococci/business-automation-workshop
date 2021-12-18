@@ -3,8 +3,6 @@ package local.example.demo.views.customer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -18,12 +16,12 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import javax.annotation.security.RolesAllowed;
-
 import local.example.demo.data.entity.Customer;
 import local.example.demo.data.service.CustomerService;
 import local.example.demo.views.MainLayout;
+import local.example.demo.views.customer.field.PhoneNumberField;
+
+import javax.annotation.security.RolesAllowed;
 
 @PageTitle("Customer Form")
 @Route(value = "customer-form", layout = MainLayout.class)
@@ -35,7 +33,7 @@ public class CustomerFormView extends Div {
     private final TextField lastName = new TextField("Last name");
     private final EmailField email = new EmailField("Email address");
     private final DatePicker dateOfBirth = new DatePicker("Birthday");
-    private final PhoneNumberField phone = new PhoneNumberField("Phone number");
+    private final PhoneNumberField phoneNumber = new PhoneNumberField("Phone number");
     private final TextField occupation = new TextField("Occupation");
 
     private final Button cancel = new Button("Cancel");
@@ -76,7 +74,7 @@ public class CustomerFormView extends Div {
                 firstName,
                 lastName,
                 dateOfBirth,
-                phone,
+                phoneNumber,
                 email,
                 occupation
         );
@@ -92,7 +90,7 @@ public class CustomerFormView extends Div {
         return buttonLayout;
     }
 
-    private static class PhoneNumberField extends CustomField<String> {
+    /*private static class PhoneNumberField extends CustomField<String> {
         private final ComboBox<String> countryCode = new ComboBox<>();
         private final TextField number = new TextField();
 
@@ -133,5 +131,5 @@ public class CustomerFormView extends Div {
                 number.clear();
             }
         }
-    }
+    }*/
 }
