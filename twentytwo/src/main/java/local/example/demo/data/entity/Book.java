@@ -21,7 +21,6 @@ public class Book extends AbstractEntity {
     private LocalDate publication;
     private Integer pages;
     private String isbn;
-    private Cost cost;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
@@ -77,14 +76,6 @@ public class Book extends AbstractEntity {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    public Cost getCost() {
-        return cost;
-    }
-
-    public void setCost(Cost cost) {
-        this.cost = cost;
     }
 
     public List<Customer> getBookCustomer() {
