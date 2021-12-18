@@ -71,23 +71,23 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
-        customerGrid.addColumn(Customer::getName).setAutoWidth(true);
-        customerGrid.addColumn(Customer::getSurname).setAutoWidth(true);
-        customerGrid.addColumn(Customer::getEmail).setAutoWidth(true);
-        customerGrid.addColumn(Customer::getPhone).setAutoWidth(true);
-        customerGrid.addColumn(Customer::getBirthday).setAutoWidth(true);
-        customerGrid.addColumn(Customer::getOccupation).setAutoWidth(true);
-        customerGrid.setItems(query -> customerService.list(
+        this.customerGrid.addColumn(Customer::getName).setAutoWidth(true);
+        this.customerGrid.addColumn(Customer::getSurname).setAutoWidth(true);
+        this.customerGrid.addColumn(Customer::getEmail).setAutoWidth(true);
+        this.customerGrid.addColumn(Customer::getPhone).setAutoWidth(true);
+        this.customerGrid.addColumn(Customer::getBirthday).setAutoWidth(true);
+        this.customerGrid.addColumn(Customer::getOccupation).setAutoWidth(true);
+        this.customerGrid.setItems(query -> this.customerService.list(
                 PageRequest.of(
                     query.getPage(), 
                     query.getPageSize(), 
                     VaadinSpringDataHelpers.toSpringDataSort(query)
                 ))
                 .stream());
-        customerGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
-        customerGrid.setHeightFull();
+        this.customerGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
+        this.customerGrid.setHeightFull();
 
-        customerGrid.asSingleSelect().addValueChangeListener(event -> {
+        this.customerGrid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 UI.getCurrent().navigate(
                     String.format(CUSTOMER_EDIT_ROUTE_TEMPLATE, event.getValue().getId())
@@ -98,23 +98,23 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
             }
         });
 
-        customerBinder = new BeanValidationBinder<>(Customer.class);
+        this.customerBinder = new BeanValidationBinder<>(Customer.class);
 
-        customerBinder.bindInstanceFields(this);
+        this.customerBinder.bindInstanceFields(this);
 
-        cancel.addClickListener(e -> {
+        this.cancel.addClickListener(e -> {
             clearForm();
             refreshGrid();
         });
 
-        save.addClickListener(e -> {
+        this.save.addClickListener(e -> {
             try {
                 if (this.customer == null) {
                     this.customer = new Customer();
                 }
-                customerBinder.writeBean(this.customer);
+                this.customerBinder.writeBean(this.customer);
 
-                customerService.update(this.customer);
+                this.customerService.update(this.customer);
                 clearForm();
                 refreshGrid();
                 Notification.show("Customer details stored!");
@@ -157,19 +157,19 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        name = new TextField("Name");
-        surname = new TextField("Surname");
-        email = new TextField("Email");
-        phone = new TextField("Phone");
-        birthday = new DatePicker("Birthday");
-        occupation = new TextField("Occupation");
+        this.name = new TextField("Name");
+        this.surname = new TextField("Surname");
+        this.email = new TextField("Email");
+        this.phone = new TextField("Phone");
+        this.birthday = new DatePicker("Birthday");
+        this.occupation = new TextField("Occupation");
         Component[] fields = new Component[] {
-            name, 
-            surname, 
-            email, 
-            phone, 
-            birthday, 
-            occupation
+                this.name,
+                this.surname,
+                this.email,
+                this.phone,
+                this.birthday,
+                this.occupation
         };
 
         for (Component field : fields) {
@@ -188,9 +188,12 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
             "w-full flex-wrap bg-contrast-5 py-s px-l"
         );
         buttonLayout.setSpacing(true);
-        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonLayout.add(save, cancel);
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        buttonLayout.add(
+                this.save,
+                this.cancel
+        );
         editorLayoutDiv.add(buttonLayout);
     }
 
@@ -199,12 +202,12 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
         wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
-        wrapper.add(customerGrid);
+        wrapper.add(this.customerGrid);
     }
 
     private void refreshGrid() {
-        customerGrid.select(null);
-        customerGrid.getLazyDataView().refreshAll();
+        this.customerGrid.select(null);
+        this.customerGrid.getLazyDataView().refreshAll();
     }
 
     private void clearForm() {
@@ -213,6 +216,6 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
     private void populateForm(Customer value) {
         this.customer = value;
-        customerBinder.readBean(this.customer);
+        this.customerBinder.readBean(this.customer);
     }
 }
