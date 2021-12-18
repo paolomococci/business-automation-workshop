@@ -16,8 +16,10 @@ public class BookField extends CustomField<Book> {
 
     public BookField(String label) {
         setLabel(label);
-        HorizontalLayout horizontalLayout = new HorizontalLayout(book);
-        horizontalLayout.setFlexGrow(1.0, book);
+        this.book.setPlaceholder("Book");
+        this.book.setItems();
+        HorizontalLayout horizontalLayout = new HorizontalLayout(this.book);
+        horizontalLayout.setFlexGrow(1.0, this.book);
         add(horizontalLayout);
     }
 
