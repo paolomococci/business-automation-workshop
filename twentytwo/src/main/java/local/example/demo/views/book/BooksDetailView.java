@@ -39,6 +39,9 @@ import org.springframework.data.domain.PageRequest;
 @RolesAllowed("admin")
 public class BooksDetailView extends Div implements BeforeEnterObserver {
 
+    @Autowired
+    BookService bookService;
+
     private final String BOOK_EDIT_ROUTE_TEMPLATE = "books-detail/%d/edit";
 
     private final Grid<Book> bookGrid = new Grid<>(Book.class, false);
@@ -56,10 +59,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
 
     private Book book;
 
-    private final BookService bookService;
-
-    public BooksDetailView(@Autowired BookService bookService) {
-        this.bookService = bookService;
+    public BooksDetailView() {
         addClassNames(
             "books-detail-view", 
             "flex", 
