@@ -1,5 +1,6 @@
 package local.example.demo.data.service;
 
+import java.util.List;
 import java.util.Optional;
 import local.example.demo.data.entity.Book;
 import local.example.demo.data.repository.BookRepository;
@@ -28,6 +29,10 @@ public class BookService {
 
     public void delete(Integer id) {
         bookRepository.deleteById(id);
+    }
+
+    public List<Book> list() {
+        return bookRepository.findAll();
     }
 
     public Page<Book> list(Pageable pageable) {
