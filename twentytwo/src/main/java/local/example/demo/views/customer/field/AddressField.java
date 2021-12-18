@@ -13,15 +13,14 @@ public class AddressField extends CustomField<Address> {
     @Autowired
     AddressService addressService;
 
-    private final ComboBox<Address> address = new ComboBox<>();
-
     public AddressField(String label) {
         setLabel(label);
-        this.address.setPlaceholder("Address");
-        this.address.setRenderer(new TextRenderer<>(entity -> entity.toString()));
-        this.address.setItems(this.addressService.list());
-        HorizontalLayout horizontalLayout = new HorizontalLayout(this.address);
-        horizontalLayout.setFlexGrow(1.0, this.address);
+        ComboBox<Address> address = new ComboBox<>();
+        address.setPlaceholder("Address");
+        address.setRenderer(new TextRenderer<>(Address::toString));
+        address.setItems(this.addressService.list());
+        HorizontalLayout horizontalLayout = new HorizontalLayout(address);
+        horizontalLayout.setFlexGrow(1.0, address);
         add(horizontalLayout);
     }
 
