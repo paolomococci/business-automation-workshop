@@ -16,13 +16,14 @@ public class AddressField extends CustomField<Address> {
     private final ComboBox<Address> address = new ComboBox<>();
 
     public AddressField(String label) {
-        setLabel(label);
+        this.setLabel(label);
         this.address.setPlaceholder("Address");
         this.address.setRenderer(new TextRenderer<>(Address::toString));
         this.address.setItems(this.addressService.list());
         HorizontalLayout horizontalLayout = new HorizontalLayout(this.address);
         horizontalLayout.setFlexGrow(1.0, this.address);
-        add(horizontalLayout);
+
+        this.add(horizontalLayout);
     }
 
     @Override
