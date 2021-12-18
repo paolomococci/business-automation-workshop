@@ -13,11 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
 
-    private BookRepository bookRepository;
-
-    public BookService(@Autowired BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    @Autowired
+    BookRepository bookRepository;
 
     public Optional<Book> get(Integer id) {
         return bookRepository.findById(id);
