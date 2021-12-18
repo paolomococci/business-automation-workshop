@@ -1,5 +1,6 @@
 package local.example.demo.data.service;
 
+import java.util.List;
 import java.util.Optional;
 import local.example.demo.data.entity.Customer;
 import local.example.demo.data.repository.CustomerRepository;
@@ -25,6 +26,10 @@ public class CustomerService {
 
     public void delete(Integer id) {
         customerRepository.deleteById(id);
+    }
+
+    public List<Customer> list() {
+        return customerRepository.findAll();
     }
 
     public Page<Customer> list(Pageable pageable) {
