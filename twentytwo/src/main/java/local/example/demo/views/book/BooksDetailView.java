@@ -76,7 +76,8 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
         this.bookGrid.addColumn("publication").setAutoWidth(true);
         this.bookGrid.addColumn("pages").setAutoWidth(true);
         this.bookGrid.addColumn("isbn").setAutoWidth(true);
-        this.bookGrid.addColumn(Book::getCost).setAutoWidth(true);
+        this.bookGrid.addColumn("cost").setAutoWidth(true);
+
         this.bookGrid.setItems(query -> this.bookService.list(
                 PageRequest.of(
                     query.getPage(), 
@@ -84,6 +85,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
                     VaadinSpringDataHelpers.toSpringDataSort(query)
                 ))
                 .stream());
+
         this.bookGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         this.bookGrid.setHeightFull();
 
