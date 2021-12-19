@@ -72,7 +72,7 @@ public class MainLayout
         Div layout = new Div();
         layout.addClassNames("flex", "h-xl", "items-center", "px-l");
 
-        H1 appName = new H1("entangled");
+        H1 appName = new H1("Entangled web application");
         appName.addClassNames("my-0", "me-auto", "text-l");
         layout.add(appName);
 
