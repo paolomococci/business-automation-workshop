@@ -24,8 +24,12 @@ import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import java.util.Optional;
 import javax.annotation.security.RolesAllowed;
 import local.example.entangled.data.entity.Employee;
+import local.example.entangled.data.service.AddressService;
 import local.example.entangled.data.service.EmployeeService;
+import local.example.entangled.data.service.GuestService;
 import local.example.entangled.views.MainLayout;
+import local.example.entangled.views.field.AddressField;
+import local.example.entangled.views.field.GuestField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
@@ -40,12 +44,14 @@ public class EmployeesDetailView
 
     private Grid<Employee> employeeGrid = new Grid<>(Employee.class, false);
 
-    private TextField name;
-    private TextField surname;
-    private TextField email;
-    private TextField phone;
-    private DatePicker birthday;
-    private TextField assignment;
+    private TextField nameTextField;
+    private TextField surnameTextField;
+    private TextField emailTextField;
+    private TextField phoneTextField;
+    private DatePicker birthdayDatePicker;
+    private TextField assignmentTextField;
+    private AddressField addressField;
+    private GuestField guestField;
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
@@ -54,10 +60,20 @@ public class EmployeesDetailView
 
     private Employee employee;
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+    private final AddressService addressService;
+    private final GuestService guestService;
 
-    public EmployeesDetailView(@Autowired EmployeeService employeeService) {
+    public EmployeesDetailView(
+            @Autowired EmployeeService employeeService,
+            @Autowired AddressService addressService,
+            @Autowired GuestService guestService
+            ) {
         this.employeeService = employeeService;
+        this.addressService = addressService;
+        this.guestService = guestService;
+
+
         addClassNames("employees-detail-view", "flex", "flex-col", "h-full");
 
         SplitLayout splitLayout = new SplitLayout();
@@ -147,19 +163,23 @@ public class EmployeesDetailView
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        this.name = new TextField("Name");
-        this.surname = new TextField("Surname");
-        this.email = new TextField("Email");
-        this.phone = new TextField("Phone");
-        this.birthday = new DatePicker("Birthday");
-        this.assignment = new TextField("Assignment");
+        this.nameTextField = new TextField("Name");
+        this.surnameTextField = new TextField("Surname");
+        this.emailTextField = new TextField("Email");
+        this.phoneTextField = new TextField("Phone");
+        this.birthdayDatePicker = new DatePicker("Birthday");
+        this.assignmentTextField = new TextField("Assignment");
+        this.addressField = new AddressField(this.addressService);
+        this.guestField = new GuestField(this.guestService);
         Component[] fields = new Component[]{
-                this.name,
-                this.surname,
-                this.email,
-                this.phone,
-                this.birthday,
-                this.assignment
+                this.nameTextField,
+                this.surnameTextField,
+                this.emailTextField,
+                this.phoneTextField,
+                this.birthdayDatePicker,
+                this.assignmentTextField,
+                this.addressField,
+                this.guestField
         };
 
         for (Component field : fields) {
