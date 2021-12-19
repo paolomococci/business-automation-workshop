@@ -169,17 +169,17 @@ public class EmployeesDetailView
         this.phoneTextField = new TextField("Phone");
         this.birthdayDatePicker = new DatePicker("Birthday");
         this.assignmentTextField = new TextField("Assignment");
-        this.addressField = new AddressField(this.addressService);
-        this.guestField = new GuestField(this.guestService);
+        /*this.addressField = new AddressField(this.addressService);
+        this.guestField = new GuestField(this.guestService);*/
         Component[] fields = new Component[]{
                 this.nameTextField,
                 this.surnameTextField,
                 this.emailTextField,
                 this.phoneTextField,
                 this.birthdayDatePicker,
-                this.assignmentTextField,
+                this.assignmentTextField/*,
                 this.addressField,
-                this.guestField
+                this.guestField*/
         };
 
         for (Component field : fields) {
