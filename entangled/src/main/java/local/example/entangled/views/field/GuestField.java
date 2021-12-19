@@ -5,7 +5,6 @@ import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import local.example.entangled.data.entity.Guest;
 import local.example.entangled.data.service.GuestService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class GuestField
         extends CustomField<Guest> {
