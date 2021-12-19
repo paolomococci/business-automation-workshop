@@ -18,8 +18,8 @@ public class AddressField extends CustomField<Address> {
     public AddressField(String label) {
         this.setLabel(label);
         this.address.setPlaceholder("Address");
-        this.address.setRenderer(new TextRenderer<>(Address::getStreet));
         this.address.setItems(this.addressService.list());
+        this.address.setRenderer(new TextRenderer<>(Address::getStreet));
         HorizontalLayout horizontalLayout = new HorizontalLayout(this.address);
         horizontalLayout.setFlexGrow(1.0, this.address);
 
