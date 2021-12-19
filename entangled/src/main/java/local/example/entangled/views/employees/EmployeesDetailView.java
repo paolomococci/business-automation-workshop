@@ -39,16 +39,17 @@ public class EmployeesDetailView
         extends Div
         implements BeforeEnterObserver {
 
+    private final String EMPLOYEE_ID = "employeeID";
     private final String EMPLOYEE_EDIT_ROUTE_TEMPLATE = "employees-detail/%d/edit";
 
     private Grid<Employee> employeeGrid = new Grid<>(Employee.class, false);
 
-    private TextField nameTextField;
-    private TextField surnameTextField;
-    private TextField emailTextField;
-    private TextField phoneTextField;
-    private DatePicker birthdayDatePicker;
-    private TextField assignmentTextField;
+    private TextField name;
+    private TextField surname;
+    private TextField email;
+    private TextField phone;
+    private DatePicker birthday;
+    private TextField assignment;
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
@@ -71,20 +72,20 @@ public class EmployeesDetailView
 
         add(splitLayout);
 
-        this.employeeGrid.addColumn(Employee::getName).setAutoWidth(true);
-        this.employeeGrid.addColumn(Employee::getSurname).setAutoWidth(true);
-        this.employeeGrid.addColumn(Employee::getAddress).setAutoWidth(true);
-        this.employeeGrid.addColumn(Employee::getPhone).setAutoWidth(true);
-        this.employeeGrid.addColumn(Employee::getBirthday).setAutoWidth(true);
-        this.employeeGrid.addColumn(Employee::getAssignment).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getName).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getSurname).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getEmail).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getPhone).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getBirthday).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getAssignment).setAutoWidth(true);
 
-        employeeGrid.setItems(query -> this.employeeService.pageable(
-                PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
+        employeeGrid.setItems(query -> employeeService.pageable(
+                        PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
                 .stream());
-        this.employeeGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
-        this.employeeGrid.setHeightFull();
+        employeeGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
+        employeeGrid.setHeightFull();
 
-        this.employeeGrid.asSingleSelect().addValueChangeListener(event -> {
+        employeeGrid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 UI.getCurrent().navigate(String.format(EMPLOYEE_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
             } else {
@@ -93,23 +94,23 @@ public class EmployeesDetailView
             }
         });
 
-        this.employeeBeanValidationBinder = new BeanValidationBinder<>(Employee.class);
+        employeeBeanValidationBinder = new BeanValidationBinder<>(Employee.class);
 
-        this.employeeBeanValidationBinder.bindInstanceFields(this);
+        employeeBeanValidationBinder.bindInstanceFields(this);
 
-        this.cancel.addClickListener(e -> {
+        cancel.addClickListener(e -> {
             clearForm();
             refreshGrid();
         });
 
-        this.save.addClickListener(e -> {
+        save.addClickListener(e -> {
             try {
                 if (this.employee == null) {
                     this.employee = new Employee();
                 }
-                this.employeeBeanValidationBinder.writeBean(this.employee);
+                employeeBeanValidationBinder.writeBean(this.employee);
 
-                this.employeeService.update(this.employee);
+                employeeService.update(this.employee);
                 clearForm();
                 refreshGrid();
                 Notification.show("Employee details stored.");
@@ -123,7 +124,6 @@ public class EmployeesDetailView
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        String EMPLOYEE_ID = "employeeID";
         Optional<Integer> employeeId = event.getRouteParameters().getInteger(EMPLOYEE_ID);
         if (employeeId.isPresent()) {
             Optional<Employee> employeeFromBackend = employeeService.get(employeeId.get());
@@ -148,19 +148,19 @@ public class EmployeesDetailView
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        this.nameTextField = new TextField("Name");
-        this.surnameTextField = new TextField("Surname");
-        this.emailTextField = new TextField("Email");
-        this.phoneTextField = new TextField("Phone");
-        this.birthdayDatePicker = new DatePicker("Birthday");
-        this.assignmentTextField = new TextField("Assignment");
+        name = new TextField("Name");
+        surname = new TextField("Surname");
+        email = new TextField("Email");
+        phone = new TextField("Phone");
+        birthday = new DatePicker("Birthday");
+        assignment = new TextField("Assignment");
         Component[] fields = new Component[]{
-                this.nameTextField,
-                this.surnameTextField,
-                this.emailTextField,
-                this.phoneTextField,
-                this.birthdayDatePicker,
-                this.assignmentTextField
+                name,
+                surname,
+                email,
+                phone,
+                birthday,
+                assignment
         };
 
         for (Component field : fields) {
@@ -177,9 +177,9 @@ public class EmployeesDetailView
         HorizontalLayout buttonLayout = new HorizontalLayout();
         buttonLayout.setClassName("w-full flex-wrap bg-contrast-5 py-s px-l");
         buttonLayout.setSpacing(true);
-        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonLayout.add(this.save, this.cancel);
+        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        buttonLayout.add(save, cancel);
         editorLayoutDiv.add(buttonLayout);
     }
 
@@ -188,12 +188,12 @@ public class EmployeesDetailView
         wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
-        wrapper.add(this.employeeGrid);
+        wrapper.add(employeeGrid);
     }
 
     private void refreshGrid() {
-        this.employeeGrid.select(null);
-        this.employeeGrid.getLazyDataView().refreshAll();
+        employeeGrid.select(null);
+        employeeGrid.getLazyDataView().refreshAll();
     }
 
     private void clearForm() {
@@ -202,6 +202,6 @@ public class EmployeesDetailView
 
     private void populateForm(Employee value) {
         this.employee = value;
-        this.employeeBeanValidationBinder.readBean(this.employee);
+        employeeBeanValidationBinder.readBean(this.employee);
     }
 }
