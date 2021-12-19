@@ -60,7 +60,6 @@ public class EmployeesDetailView
         this.employeeService = employeeService;
         addClassNames("employees-detail-view", "flex", "flex-col", "h-full");
 
-        // Create UI
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
 
@@ -69,20 +68,22 @@ public class EmployeesDetailView
 
         add(splitLayout);
 
-        employeeGrid.addColumn(Employee::getName).setAutoWidth(true);
-        employeeGrid.addColumn(Employee::getSurname).setAutoWidth(true);
-        employeeGrid.addColumn(Employee::getAddress).setAutoWidth(true);
-        employeeGrid.addColumn(Employee::getPhone).setAutoWidth(true);
-        employeeGrid.addColumn(Employee::getBirthday).setAutoWidth(true);
-        employeeGrid.addColumn(Employee::getAssignment).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getName).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getSurname).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getAddress).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getPhone).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getBirthday).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getAssignment).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getAddress).setAutoWidth(true);
+        this.employeeGrid.addColumn(Employee::getGuest).setAutoWidth(true);
 
-        employeeGrid.setItems(query -> employeeService.pageable(
+        employeeGrid.setItems(query -> this.employeeService.pageable(
                 PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
                 .stream());
-        employeeGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
-        employeeGrid.setHeightFull();
+        this.employeeGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
+        this.employeeGrid.setHeightFull();
 
-        employeeGrid.asSingleSelect().addValueChangeListener(event -> {
+        this.employeeGrid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 UI.getCurrent().navigate(String.format(EMPLOYEE_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
             } else {
@@ -91,23 +92,23 @@ public class EmployeesDetailView
             }
         });
 
-        employeeBeanValidationBinder = new BeanValidationBinder<>(Employee.class);
+        this.employeeBeanValidationBinder = new BeanValidationBinder<>(Employee.class);
 
-        employeeBeanValidationBinder.bindInstanceFields(this);
+        this.employeeBeanValidationBinder.bindInstanceFields(this);
 
-        cancel.addClickListener(e -> {
+        this.cancel.addClickListener(e -> {
             clearForm();
             refreshGrid();
         });
 
-        save.addClickListener(e -> {
+        this.save.addClickListener(e -> {
             try {
                 if (this.employee == null) {
                     this.employee = new Employee();
                 }
-                employeeBeanValidationBinder.writeBean(this.employee);
+                this.employeeBeanValidationBinder.writeBean(this.employee);
 
-                employeeService.update(this.employee);
+                this.employeeService.update(this.employee);
                 clearForm();
                 refreshGrid();
                 Notification.show("Employee details stored.");
@@ -146,19 +147,19 @@ public class EmployeesDetailView
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        name = new TextField("Name");
-        surname = new TextField("Surname");
-        email = new TextField("Email");
-        phone = new TextField("Phone");
-        birthday = new DatePicker("Birthday");
-        assignment = new TextField("Assignment");
+        this.name = new TextField("Name");
+        this.surname = new TextField("Surname");
+        this.email = new TextField("Email");
+        this.phone = new TextField("Phone");
+        this.birthday = new DatePicker("Birthday");
+        this.assignment = new TextField("Assignment");
         Component[] fields = new Component[]{
-                name,
-                surname,
-                email,
-                phone,
-                birthday,
-                assignment
+                this.name,
+                this.surname,
+                this.email,
+                this.phone,
+                this.birthday,
+                this.assignment
         };
 
         for (Component field : fields) {
@@ -175,9 +176,9 @@ public class EmployeesDetailView
         HorizontalLayout buttonLayout = new HorizontalLayout();
         buttonLayout.setClassName("w-full flex-wrap bg-contrast-5 py-s px-l");
         buttonLayout.setSpacing(true);
-        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonLayout.add(save, cancel);
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        buttonLayout.add(this.save, this.cancel);
         editorLayoutDiv.add(buttonLayout);
     }
 
@@ -186,12 +187,12 @@ public class EmployeesDetailView
         wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
-        wrapper.add(employeeGrid);
+        wrapper.add(this.employeeGrid);
     }
 
     private void refreshGrid() {
-        employeeGrid.select(null);
-        employeeGrid.getLazyDataView().refreshAll();
+        this.employeeGrid.select(null);
+        this.employeeGrid.getLazyDataView().refreshAll();
     }
 
     private void clearForm() {
@@ -200,6 +201,6 @@ public class EmployeesDetailView
 
     private void populateForm(Employee value) {
         this.employee = value;
-        employeeBeanValidationBinder.readBean(this.employee);
+        this.employeeBeanValidationBinder.readBean(this.employee);
     }
 }
