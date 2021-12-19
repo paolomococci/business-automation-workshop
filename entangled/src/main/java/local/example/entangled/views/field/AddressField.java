@@ -7,7 +7,7 @@ import local.example.entangled.data.entity.Address;
 public class AddressField
         extends CustomField<Address> {
 
-    private ComboBox<Address> addressComboBox;
+    private final ComboBox<Address> addressComboBox;
 
     public AddressField(ComboBox<Address> addressComboBox) {
         this.addressComboBox = addressComboBox;
