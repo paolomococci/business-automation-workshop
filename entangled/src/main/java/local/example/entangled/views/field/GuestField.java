@@ -14,7 +14,7 @@ public class GuestField
     private final ComboBox<Guest> guestComboBox;
 
     public GuestField(
-            @Autowired GuestService guestService
+            GuestService guestService
     ) {
         this.guestService = guestService;
         this.guestComboBox = new ComboBox<>("Guest");
