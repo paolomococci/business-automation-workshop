@@ -7,7 +7,7 @@ import local.example.entangled.data.entity.Guest;
 public class GuestField
         extends CustomField<Guest> {
 
-    private ComboBox<Guest> guestComboBox;
+    private final ComboBox<Guest> guestComboBox;
 
     public GuestField(ComboBox<Guest> guestComboBox) {
         this.guestComboBox = guestComboBox;
