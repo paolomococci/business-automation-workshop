@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AddressField
         extends CustomField<Address> {
 
+    private Address address;
     private final AddressService addressService;
     private final ComboBox<Address> addressComboBox;
 
@@ -24,11 +25,19 @@ public class AddressField
 
     @Override
     protected Address generateModelValue() {
-        return null;
+        return this.addressComboBox.getValue();
     }
 
     @Override
     protected void setPresentationValue(Address address) {
+        this.address = address;
+    }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
