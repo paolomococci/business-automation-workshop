@@ -2,6 +2,7 @@ package local.example.entangled.views.field;
 
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.customfield.CustomField;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import local.example.entangled.data.entity.Address;
 import local.example.entangled.data.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,10 @@ public class AddressField
         this.addressComboBox = new ComboBox<>("Address");
         this.addressComboBox.setItems(this.addressService.list());
         this.addressComboBox.setItemLabelGenerator(Address::getStreet);
-        this.add(this.addressComboBox);
+        HorizontalLayout horizontalLayout = new HorizontalLayout(this.addressComboBox);
+        horizontalLayout.setFlexGrow(1.0, this.addressComboBox);
+
+        this.add(horizontalLayout);
     }
 
     @Override
