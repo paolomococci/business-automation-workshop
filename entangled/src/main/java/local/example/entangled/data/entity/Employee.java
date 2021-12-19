@@ -19,12 +19,12 @@ public class Employee
     private LocalDate birthday;
     private String assignment;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "address_fk", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_fk")
     private Address address;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "guest_fk", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guest_fk")
     private Guest guest;
 
     public String getName() {
