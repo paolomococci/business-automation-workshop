@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GuestField
         extends CustomField<Guest> {
 
+    private Guest guest;
     private final GuestService guestService;
     private final ComboBox<Guest> guestComboBox;
 
@@ -24,11 +25,19 @@ public class GuestField
 
     @Override
     protected Guest generateModelValue() {
-        return null;
+        return this.guestComboBox.getValue();
     }
 
     @Override
     protected void setPresentationValue(Guest guest) {
+        this.guest = guest;
+    }
 
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 }
