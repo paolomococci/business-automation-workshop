@@ -14,7 +14,7 @@ public class AddressField
     private final ComboBox<Address> addressComboBox;
 
     public AddressField(
-            @Autowired AddressService addressService
+            AddressService addressService
     ) {
         this.addressService = addressService;
         this.addressComboBox = new ComboBox<>("Address");
