@@ -15,11 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddressService {
 
-    private AddressRepository addressRepository;
-
-    public AddressService(@Autowired AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
+    @Autowired
+    AddressRepository addressRepository;
 
     public Optional<Address> get(Integer id) {
         return addressRepository.findById(id);
