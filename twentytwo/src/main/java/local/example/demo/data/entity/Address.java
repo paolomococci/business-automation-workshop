@@ -21,14 +21,6 @@ public class Address extends AbstractEntity {
     @JoinColumn(name = "address_customer_fk")
     private Customer customer;
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public String getStreet() {
         return street;
     }
