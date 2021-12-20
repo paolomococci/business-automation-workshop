@@ -77,6 +77,9 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
         this.customerGrid.addColumn(Customer::getPhone).setAutoWidth(true);
         this.customerGrid.addColumn(Customer::getBirthday).setAutoWidth(true);
         this.customerGrid.addColumn(Customer::getOccupation).setAutoWidth(true);
+        this.customerGrid.addColumn(Customer::getAddresses).setAutoWidth(true);
+        this.customerGrid.addColumn(Customer::getBooks).setAutoWidth(true);
+
         this.customerGrid.setItems(query -> this.customerService.pageable(
                 PageRequest.of(
                     query.getPage(), 
