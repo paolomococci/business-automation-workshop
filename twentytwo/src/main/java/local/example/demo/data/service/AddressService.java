@@ -35,7 +35,7 @@ public class AddressService {
     }
 
     public Stream<Address> stream() {
-        return (Stream<Address>) addressRepository.findAll();
+        return addressRepository.findAll().stream();
     }
 
     public Page<Address> pageable(Pageable pageable) {
