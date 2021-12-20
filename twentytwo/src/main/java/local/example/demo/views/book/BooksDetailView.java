@@ -81,7 +81,7 @@ public class BooksDetailView extends Div implements BeforeEnterObserver {
         this.bookGrid.addColumn(Book::getPages).setAutoWidth(true);
         this.bookGrid.addColumn(Book::getIsbn).setAutoWidth(true);
 
-        this.bookGrid.setItems(query -> this.bookService.list(
+        this.bookGrid.setItems(query -> this.bookService.pageable(
                 PageRequest.of(
                     query.getPage(), 
                     query.getPageSize(), 
