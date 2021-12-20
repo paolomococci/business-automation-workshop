@@ -17,7 +17,7 @@ public class Address extends AbstractEntity {
     private String state;
     private String country;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_customer_fk")
     private Customer customer;
 
