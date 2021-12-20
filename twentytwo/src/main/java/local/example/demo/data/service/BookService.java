@@ -35,7 +35,7 @@ public class BookService {
     }
 
     public Stream<Book> stream() {
-        return (Stream<Book>) bookRepository.findAll();
+        return bookRepository.findAll().stream();
     }
 
     public Page<Book> pageable(Pageable pageable) {
