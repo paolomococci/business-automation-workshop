@@ -43,7 +43,12 @@ public class AddressService {
     }
 
     public Stream<Address> stream() {
-        return addressRepository.findAll().stream();
+        try {
+            return addressRepository.findAll().stream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Stream.empty();
     }
 
     public Page<Address> pageable(Pageable pageable) {
