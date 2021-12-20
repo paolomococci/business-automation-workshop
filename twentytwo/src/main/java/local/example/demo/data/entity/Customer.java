@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import local.example.demo.data.AbstractEntity;
 
@@ -21,7 +18,7 @@ public class Customer extends AbstractEntity {
     private LocalDate birthday;
     private String occupation;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Address> addresses = new LinkedList<>();
 
     @ManyToMany(mappedBy = "bookCustomer")
