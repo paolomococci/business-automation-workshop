@@ -32,7 +32,7 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Page<Customer> list(Pageable pageable) {
+    public Page<Customer> pageable(Pageable pageable) {
         return customerRepository.findAll(pageable);
     }
 
