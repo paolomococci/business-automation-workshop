@@ -37,10 +37,10 @@ public class DataGenerator {
 
             /* normal user */
             User user = new User();
-            user.setName("John Doe");
-            user.setUsername("johndoe");
+            user.setName("John Under");
+            user.setUsername("johnunder");
             user.setHashedPassword(
-                passwordEncoder.encode("johndoe")
+                passwordEncoder.encode("johnunder")
             );
             user.setProfilePictureUrl(null);
             user.setRoles(Collections.singleton(Role.USER));
@@ -48,10 +48,10 @@ public class DataGenerator {
 
             /* administrator user */
             User admin = new User();
-            admin.setName("Amy Doe");
-            admin.setUsername("amydoe");
+            admin.setName("Amy Boss");
+            admin.setUsername("amyboss");
             admin.setHashedPassword(
-                passwordEncoder.encode("amydoe")
+                passwordEncoder.encode("amyboss")
             );
             admin.setProfilePictureUrl(null);
             admin.setRoles(Stream.of(Role.USER, Role.ADMIN).collect(Collectors.toSet()));
