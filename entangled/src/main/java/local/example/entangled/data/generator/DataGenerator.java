@@ -33,16 +33,16 @@ public class DataGenerator {
 
             logger.info("Generating two User entities.");
             User user = new User();
-            user.setName("John Doe");
-            user.setUsername("johndoe");
-            user.setHashedPassword(passwordEncoder.encode("johndoe"));
+            user.setName("John Under");
+            user.setUsername("johnunder");
+            user.setHashedPassword(passwordEncoder.encode("johnunder"));
             user.setRoles(Collections.singleton(Role.USER));
             userRepository.save(user);
             
             User admin = new User();
-            admin.setName("Emily Powerful");
-            admin.setUsername("emilypowerful");
-            admin.setHashedPassword(passwordEncoder.encode("emilypowerful"));
+            admin.setName("Amy Boss");
+            admin.setUsername("amyboss");
+            admin.setHashedPassword(passwordEncoder.encode("amyboss"));
             admin.setRoles(Stream.of(Role.USER, Role.ADMIN).collect(Collectors.toSet()));
             userRepository.save(admin);
 
