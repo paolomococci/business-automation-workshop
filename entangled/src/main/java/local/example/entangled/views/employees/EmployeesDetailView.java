@@ -170,13 +170,28 @@ public class EmployeesDetailView
         phone = new TextField("Phone");
         birthday = new DatePicker("Birthday");
         assignment = new TextField("Assignment");
+
+        addressComboBox = new ComboBox<>("Address");
+        addressComboBox.setItems(
+                query -> addressService.stream()
+        );
+        addressComboBox.setItemLabelGenerator(Address::getStreet);
+
+        guestComboBox = new ComboBox<>("Guest");
+        guestComboBox.setItems(
+                query -> guestService.stream()
+        );
+        guestComboBox.setItemLabelGenerator(Guest::getUsername);
+
         Component[] fields = new Component[]{
                 name,
                 surname,
                 email,
                 phone,
                 birthday,
-                assignment
+                assignment,
+                addressComboBox,
+                guestComboBox
         };
 
         for (Component field : fields) {
