@@ -37,7 +37,7 @@ public class GuestService {
     }
 
     public Stream<Guest> stream() {
-        return (Stream<Guest>) guestRepository.findAll();
+        return guestRepository.findAll().stream();
     }
 
     public Page<Guest> pageable(Pageable pageable) {
