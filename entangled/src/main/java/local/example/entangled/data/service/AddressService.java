@@ -2,6 +2,8 @@ package local.example.entangled.data.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
+
 import local.example.entangled.data.entity.Address;
 import local.example.entangled.data.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,10 @@ public class AddressService {
 
     public List<Address> list() {
         return addressRepository.findAll();
+    }
+
+    public Stream<Address> stream() {
+        return (Stream<Address>) addressRepository.findAll();
     }
 
     public Page<Address> pageable(Pageable pageable) {
