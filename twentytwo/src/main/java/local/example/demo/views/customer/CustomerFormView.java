@@ -3,6 +3,7 @@ package local.example.demo.views.customer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -17,13 +18,19 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import local.example.demo.data.entity.Address;
+import local.example.demo.data.entity.Book;
 import local.example.demo.data.entity.Customer;
+import local.example.demo.data.service.AddressService;
+import local.example.demo.data.service.BookService;
 import local.example.demo.data.service.CustomerService;
 import local.example.demo.views.MainLayout;
 import local.example.demo.views.customer.field.PhoneNumberField;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.security.RolesAllowed;
+import java.util.stream.Stream;
 
 @PageTitle("Customer Form")
 @Route(value = "customer-form", layout = MainLayout.class)
@@ -31,19 +38,30 @@ import javax.annotation.security.RolesAllowed;
 @Uses(Icon.class)
 public class CustomerFormView extends Div {
 
+    @Autowired
+    AddressService addressService;
+
+    @Autowired
+    BookService bookService;
+
     private final TextField name = new TextField("Name");
     private final TextField surname = new TextField("Surname");
-    private final EmailField email = new EmailField("Email address");
+    private final EmailField email = new EmailField("Email");
     private final DatePicker birthday = new DatePicker("Birthday");
-    private final PhoneNumberField phoneNumber = new PhoneNumberField("Phone number");
+    private final PhoneNumberField phoneNumber = new PhoneNumberField("Phone");
     private final TextField occupation = new TextField("Occupation");
+
+    private final ComboBox<Address> addressComboBox = new ComboBox<>("Address");
+    private final ComboBox<Book> bookComboBox = new ComboBox<>("Book");
 
     private final Button cancel = new Button("Cancel");
     private final Button save = new Button("Save");
 
     private final Binder<Customer> customerBinder = new Binder<>(Customer.class);
 
-    public CustomerFormView(@Autowired CustomerService customerService) {
+    public CustomerFormView(
+            @Autowired CustomerService customerService
+    ) {
         addClassName("customer-form-view");
 
         add(createTitle());
@@ -71,14 +89,28 @@ public class CustomerFormView extends Div {
 
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
+
         email.setErrorMessage("Please enter a valid email address");
+
+        addressComboBox.setItems(
+                query -> (Stream<Address>) addressService.list()
+        );
+        addressComboBox.setItemLabelGenerator(Address::getStreet);
+
+        bookComboBox.setItems(
+                query -> (Stream<Book>) bookService.list()
+        );
+        bookComboBox.setItemLabelGenerator(Book::getTitle);
+
         formLayout.add(
                 name,
                 surname,
                 birthday,
                 phoneNumber,
                 email,
-                occupation
+                occupation,
+                addressComboBox,
+                bookComboBox
         );
         return formLayout;
     }
