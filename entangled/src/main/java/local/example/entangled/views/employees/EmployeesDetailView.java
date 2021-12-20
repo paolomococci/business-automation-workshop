@@ -100,8 +100,12 @@ public class EmployeesDetailView
         employeeGrid.addColumn(Employee::getGuest).setAutoWidth(true);
 
         employeeGrid.setItems(query -> employeeService.pageable(
-                        PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
-                .stream());
+                PageRequest.of(
+                        query.getPage(),
+                        query.getPageSize(),
+                        VaadinSpringDataHelpers.toSpringDataSort(query)
+                )).stream()
+        );
         employeeGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         employeeGrid.setHeightFull();
 
