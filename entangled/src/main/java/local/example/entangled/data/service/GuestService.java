@@ -44,7 +44,12 @@ public class GuestService {
     }
 
     public Stream<Guest> stream() {
-        return guestRepository.findAll().stream();
+        try {
+            return guestRepository.findAll().stream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Stream.empty();
     }
 
     public Page<Guest> pageable(Pageable pageable) {
