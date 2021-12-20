@@ -2,6 +2,8 @@ package local.example.entangled.data.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
+
 import local.example.entangled.data.entity.Guest;
 import local.example.entangled.data.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,10 @@ public class GuestService {
 
     public List<Guest> list() {
         return guestRepository.findAll();
+    }
+
+    public Stream<Guest> stream() {
+        return (Stream<Guest>) guestRepository.findAll();
     }
 
     public Page<Guest> pageable(Pageable pageable) {
