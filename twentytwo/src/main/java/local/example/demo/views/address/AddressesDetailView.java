@@ -79,7 +79,7 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
         this.addressGrid.addColumn(Address::getCity).setAutoWidth(true);
         this.addressGrid.addColumn(Address::getCountry).setAutoWidth(true);
 
-        this.addressGrid.setItems(query -> this.addressService.list(
+        this.addressGrid.setItems(query -> this.addressService.pageable(
                 PageRequest.of(query.getPage(), 
                 query.getPageSize(), 
                 VaadinSpringDataHelpers.toSpringDataSort(query)))
