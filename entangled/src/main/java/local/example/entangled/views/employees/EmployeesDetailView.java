@@ -26,7 +26,9 @@ import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import local.example.entangled.data.entity.Address;
 import local.example.entangled.data.entity.Employee;
 import local.example.entangled.data.entity.Guest;
+import local.example.entangled.data.service.AddressService;
 import local.example.entangled.data.service.EmployeeService;
+import local.example.entangled.data.service.GuestService;
 import local.example.entangled.views.MainLayout;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,12 @@ import java.util.Optional;
 public class EmployeesDetailView
         extends Div
         implements BeforeEnterObserver {
+
+    @Autowired
+    AddressService addressService;
+
+    @Autowired
+    GuestService guestService;
 
     private final String EMPLOYEE_ID = "employeeID";
     private final String EMPLOYEE_EDIT_ROUTE_TEMPLATE = "employees-detail/%d/edit";
