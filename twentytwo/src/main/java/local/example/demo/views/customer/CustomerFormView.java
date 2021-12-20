@@ -91,14 +91,10 @@ public class CustomerFormView extends Div {
 
         email.setErrorMessage("Please enter a valid email address");
 
-        addressComboBox.setItems(
-                query -> addressService.stream()
-        );
+        addressComboBox.setItems(addressService.list());
         addressComboBox.setItemLabelGenerator(Address::getStreet);
 
-        bookComboBox.setItems(
-                query -> bookService.stream()
-        );
+        bookComboBox.setItems(bookService.list());
         bookComboBox.setItemLabelGenerator(Book::getTitle);
 
         formLayout.add(
