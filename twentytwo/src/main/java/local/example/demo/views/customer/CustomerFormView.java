@@ -28,7 +28,6 @@ import local.example.demo.views.customer.field.PhoneNumberField;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.security.RolesAllowed;
-import java.util.stream.Stream;
 
 @PageTitle("Customer Form")
 @Route(value = "customer-form", layout = MainLayout.class)
@@ -91,12 +90,12 @@ public class CustomerFormView extends Div {
         email.setErrorMessage("Please enter a valid email address");
 
         addressComboBox.setItems(
-                query -> (Stream<Address>) addressService.list()
+                query -> addressService.stream()
         );
         addressComboBox.setItemLabelGenerator(Address::getStreet);
 
         bookComboBox.setItems(
-                query -> (Stream<Book>) bookService.list()
+                query -> bookService.stream()
         );
         bookComboBox.setItemLabelGenerator(Book::getTitle);
 
