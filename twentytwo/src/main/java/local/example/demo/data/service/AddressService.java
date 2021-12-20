@@ -2,6 +2,8 @@ package local.example.demo.data.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
+
 import local.example.demo.data.entity.Address;
 import local.example.demo.data.repository.AddressRepository;
 
@@ -32,7 +34,11 @@ public class AddressService {
         return addressRepository.findAll();
     }
 
-    public Page<Address> list(Pageable pageable) {
+    public Stream<Address> stream() {
+        return (Stream<Address>) addressRepository.findAll();
+    }
+
+    public Page<Address> pageable(Pageable pageable) {
         return addressRepository.findAll(pageable);
     }
 
