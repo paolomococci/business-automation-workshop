@@ -2,6 +2,7 @@ package local.example.entangled.data.service;
 
 import local.example.entangled.data.entity.Guest;
 import local.example.entangled.data.repository.GuestRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,12 +32,10 @@ public class GuestService {
     }
 
     public List<Guest> list() {
-        try {
-            return guestRepository.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (guestRepository.findAll().isEmpty()) {
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+        return guestRepository.findAll();
     }
 
     public Stream<Guest> stream() {
