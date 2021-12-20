@@ -5,6 +5,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -22,7 +23,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 
+import local.example.entangled.data.entity.Address;
 import local.example.entangled.data.entity.Employee;
+import local.example.entangled.data.entity.Guest;
 import local.example.entangled.data.service.EmployeeService;
 import local.example.entangled.views.MainLayout;
 
@@ -51,6 +54,9 @@ public class EmployeesDetailView
     private DatePicker birthday;
     private TextField assignment;
 
+    private ComboBox<Address> addressComboBox;
+    private ComboBox<Guest> guestComboBox;
+
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
@@ -78,6 +84,8 @@ public class EmployeesDetailView
         employeeGrid.addColumn(Employee::getPhone).setAutoWidth(true);
         employeeGrid.addColumn(Employee::getBirthday).setAutoWidth(true);
         employeeGrid.addColumn(Employee::getAssignment).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getAddress).setAutoWidth(true);
+        employeeGrid.addColumn(Employee::getGuest).setAutoWidth(true);
 
         employeeGrid.setItems(query -> employeeService.pageable(
                         PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
