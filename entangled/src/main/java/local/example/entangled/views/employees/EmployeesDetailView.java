@@ -35,6 +35,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.security.RolesAllowed;
+
+import java.util.List;
 import java.util.Optional;
 
 @PageTitle("Employees Detail")
@@ -43,12 +45,6 @@ import java.util.Optional;
 public class EmployeesDetailView
         extends Div
         implements BeforeEnterObserver {
-
-    @Autowired
-    AddressService addressService;
-
-    @Autowired
-    GuestService guestService;
 
     private final String EMPLOYEE_ID = "employeeID";
     private final String EMPLOYEE_EDIT_ROUTE_TEMPLATE = "employees-detail/%d/edit";
@@ -74,7 +70,11 @@ public class EmployeesDetailView
 
     private EmployeeService employeeService;
 
-    public EmployeesDetailView(@Autowired EmployeeService employeeService) {
+    public EmployeesDetailView(
+            @Autowired EmployeeService employeeService,
+            @Autowired AddressService addressService,
+            @Autowired GuestService guestService
+    ) {
         this.employeeService = employeeService;
         addClassNames("employees-detail-view", "flex", "flex-col", "h-full");
 
@@ -82,7 +82,11 @@ public class EmployeesDetailView
         splitLayout.setSizeFull();
 
         createGridLayout(splitLayout);
-        createEditorLayout(splitLayout);
+        createEditorLayout(
+                splitLayout,
+                addressService.list(),
+                guestService.list()
+        );
 
         add(splitLayout);
 
@@ -154,7 +158,11 @@ public class EmployeesDetailView
         }
     }
 
-    private void createEditorLayout(SplitLayout splitLayout) {
+    private void createEditorLayout(
+            SplitLayout splitLayout,
+            List<Address> addresses,
+            List<Guest> guests
+    ) {
         Div editorLayoutDiv = new Div();
         editorLayoutDiv.setClassName("flex flex-col");
         editorLayoutDiv.setWidth("400px");
@@ -172,11 +180,11 @@ public class EmployeesDetailView
         assignment = new TextField("Assignment");
 
         addressComboBox = new ComboBox<>("Address");
-        addressComboBox.setItems(addressService.list());
+        addressComboBox.setItems(addresses);
         addressComboBox.setItemLabelGenerator(Address::getStreet);
 
         guestComboBox = new ComboBox<>("Guest");
-        guestComboBox.setItems(guestService.list());
+        guestComboBox.setItems(guests);
         guestComboBox.setItemLabelGenerator(Guest::getUsername);
 
         Component[] fields = new Component[]{
