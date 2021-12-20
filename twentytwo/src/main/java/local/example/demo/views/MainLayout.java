@@ -31,7 +31,7 @@ public class MainLayout extends AppLayout {
 
         private final String text;
         private final String iconClass;
-        private Class<? extends Component> view;
+        private final Class<? extends Component> view;
 
         public MenuItemInfo(
             String text, 
