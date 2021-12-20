@@ -27,21 +27,11 @@ import java.util.Optional;
 @PageTitle("Main")
 public class MainLayout extends AppLayout {
 
-    public static class MenuItemInfo {
-
-        private final String text;
-        private final String iconClass;
-        private final Class<? extends Component> view;
-
-        public MenuItemInfo(
-            String text, 
-            String iconClass, 
+    public record MenuItemInfo(
+            String text,
+            String iconClass,
             Class<? extends Component> view
-        ) {
-            this.text = text;
-            this.iconClass = iconClass;
-            this.view = view;
-        }
+    ) {
 
         public String getText() {
             return text;
