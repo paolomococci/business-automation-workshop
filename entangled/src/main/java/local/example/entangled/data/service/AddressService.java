@@ -1,5 +1,6 @@
 package local.example.entangled.data.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -33,7 +34,12 @@ public class AddressService {
     }
 
     public List<Address> list() {
-        return addressRepository.findAll();
+        try {
+            return addressRepository.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
     }
 
     public Stream<Address> stream() {
