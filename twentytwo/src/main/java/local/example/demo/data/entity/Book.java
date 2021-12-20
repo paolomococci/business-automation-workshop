@@ -30,14 +30,6 @@ public class Book extends AbstractEntity {
     )
     private List<Customer> bookCustomer = new LinkedList<>();
 
-    public List<Customer> getCustomers() {
-        return bookCustomer;
-    }
-
-    public void setCustomers(List<Customer> bookCustomer) {
-        this.bookCustomer = bookCustomer;
-    }
-
     public String getTitle() {
         return title;
     }
