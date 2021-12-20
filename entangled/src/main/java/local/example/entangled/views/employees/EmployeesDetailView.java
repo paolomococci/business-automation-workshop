@@ -172,15 +172,11 @@ public class EmployeesDetailView
         assignment = new TextField("Assignment");
 
         addressComboBox = new ComboBox<>("Address");
-        addressComboBox.setItems(
-                query -> addressService.stream()
-        );
+        addressComboBox.setItems(addressService.list());
         addressComboBox.setItemLabelGenerator(Address::getStreet);
 
         guestComboBox = new ComboBox<>("Guest");
-        guestComboBox.setItems(
-                query -> guestService.stream()
-        );
+        guestComboBox.setItems(guestService.list());
         guestComboBox.setItemLabelGenerator(Guest::getUsername);
 
         Component[] fields = new Component[]{
