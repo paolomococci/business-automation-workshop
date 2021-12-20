@@ -16,10 +16,12 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
 import local.example.demo.data.entity.Customer;
 import local.example.demo.data.service.CustomerService;
 import local.example.demo.views.MainLayout;
 import local.example.demo.views.customer.field.PhoneNumberField;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -29,10 +31,10 @@ import javax.annotation.security.RolesAllowed;
 @Uses(Icon.class)
 public class CustomerFormView extends Div {
 
-    private final TextField firstName = new TextField("First name");
-    private final TextField lastName = new TextField("Last name");
+    private final TextField name = new TextField("Name");
+    private final TextField surname = new TextField("Surname");
     private final EmailField email = new EmailField("Email address");
-    private final DatePicker dateOfBirth = new DatePicker("Birthday");
+    private final DatePicker birthday = new DatePicker("Birthday");
     private final PhoneNumberField phoneNumber = new PhoneNumberField("Phone number");
     private final TextField occupation = new TextField("Occupation");
 
@@ -41,7 +43,7 @@ public class CustomerFormView extends Div {
 
     private final Binder<Customer> customerBinder = new Binder<>(Customer.class);
 
-    public CustomerFormView(CustomerService customerService) {
+    public CustomerFormView(@Autowired CustomerService customerService) {
         addClassName("customer-form-view");
 
         add(createTitle());
@@ -64,16 +66,16 @@ public class CustomerFormView extends Div {
     }
 
     private Component createTitle() {
-        return new H3("Customer information");
+        return new H3("Customer information fields");
     }
 
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
         email.setErrorMessage("Please enter a valid email address");
         formLayout.add(
-                firstName,
-                lastName,
-                dateOfBirth,
+                name,
+                surname,
+                birthday,
                 phoneNumber,
                 email,
                 occupation
