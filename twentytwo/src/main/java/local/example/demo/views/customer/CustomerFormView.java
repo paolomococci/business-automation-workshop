@@ -30,18 +30,13 @@ import local.example.demo.views.customer.field.PhoneNumberField;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.security.RolesAllowed;
+import java.util.List;
 
 @PageTitle("Customer Form")
 @Route(value = "customer-form", layout = MainLayout.class)
 @RolesAllowed("user")
 @Uses(Icon.class)
 public class CustomerFormView extends Div {
-
-    @Autowired
-    AddressService addressService;
-
-    @Autowired
-    BookService bookService;
 
     private final TextField name = new TextField("Name");
     private final TextField surname = new TextField("Surname");
@@ -59,12 +54,17 @@ public class CustomerFormView extends Div {
     private final Binder<Customer> customerBinder = new Binder<>(Customer.class);
 
     public CustomerFormView(
-            @Autowired CustomerService customerService
+            @Autowired CustomerService customerService,
+            @Autowired AddressService addressService,
+            @Autowired BookService bookService
     ) {
         addClassName("customer-form-view");
 
         add(createTitle());
-        add(createFormLayout());
+        add(createFormLayout(
+                addressService.list(),
+                bookService.list()
+        ));
         add(createButtonLayout());
 
         customerBinder.bindInstanceFields(this);
@@ -86,15 +86,18 @@ public class CustomerFormView extends Div {
         return new H3("Customer information fields");
     }
 
-    private Component createFormLayout() {
+    private Component createFormLayout(
+            List<Address> addressList,
+            List<Book> bookList
+    ) {
         FormLayout formLayout = new FormLayout();
 
         email.setErrorMessage("Please enter a valid email address");
 
-        addressComboBox.setItems(addressService.list());
+        addressComboBox.setItems(addressList);
         addressComboBox.setItemLabelGenerator(Address::getStreet);
 
-        bookComboBox.setItems(bookService.list());
+        bookComboBox.setItems(bookList);
         bookComboBox.setItemLabelGenerator(Book::getTitle);
 
         formLayout.add(
