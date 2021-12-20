@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -31,11 +32,21 @@ public class AddressService {
     }
 
     public List<Address> list() {
-        return addressRepository.findAll();
+        try {
+            return addressRepository.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
     }
 
     public Stream<Address> stream() {
-        return addressRepository.findAll().stream();
+        try {
+            return addressRepository.findAll().stream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Stream.empty();
     }
 
     public Page<Address> pageable(Pageable pageable) {
