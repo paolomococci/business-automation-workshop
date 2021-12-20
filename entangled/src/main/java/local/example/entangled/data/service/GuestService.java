@@ -1,5 +1,7 @@
 package local.example.entangled.data.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -33,7 +35,12 @@ public class GuestService {
     }
 
     public List<Guest> list() {
-        return guestRepository.findAll();
+        try {
+            return guestRepository.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
     }
 
     public Stream<Guest> stream() {
