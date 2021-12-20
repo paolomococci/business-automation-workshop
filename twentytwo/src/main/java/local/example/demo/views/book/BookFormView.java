@@ -20,6 +20,7 @@ import com.vaadin.flow.router.Route;
 import local.example.demo.data.entity.Book;
 import local.example.demo.data.service.BookService;
 import local.example.demo.views.MainLayout;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("Book Form")
 @Route(value = "book-form", layout = MainLayout.class)
@@ -37,7 +38,7 @@ public class BookFormView extends Div {
 
     private final Binder<Book> bookBinder = new Binder<>(Book.class);
 
-    public BookFormView(BookService bookService) {
+    public BookFormView(@Autowired BookService bookService) {
         addClassName("book-form-view");
 
         add(createTitle());
@@ -57,7 +58,7 @@ public class BookFormView extends Div {
     }
 
     private Component createTitle() {
-        return new H3("Book");
+        return new H3("Book information fields");
     }
 
     private Component createFormLayout() {
