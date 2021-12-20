@@ -22,7 +22,7 @@ public class Book extends AbstractEntity {
     private Integer pages;
     private String isbn;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
         name = "book_customer",
         joinColumns = { @JoinColumn(name = "book_id") },
