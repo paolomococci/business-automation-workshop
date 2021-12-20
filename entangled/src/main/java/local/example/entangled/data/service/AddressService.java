@@ -1,16 +1,17 @@
 package local.example.entangled.data.service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import local.example.entangled.data.entity.Address;
 import local.example.entangled.data.repository.AddressRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class AddressService {
@@ -31,12 +32,10 @@ public class AddressService {
     }
 
     public List<Address> list() {
-        try {
-            return addressRepository.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (addressRepository.findAll().isEmpty()) {
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+        return addressRepository.findAll();
     }
 
     public Stream<Address> stream() {
