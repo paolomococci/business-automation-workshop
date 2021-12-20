@@ -42,15 +42,6 @@ import org.springframework.data.domain.PageRequest;
 @RolesAllowed("admin")
 public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
-    @Autowired
-    CustomerService customerService;
-
-    @Autowired
-    AddressService addressService;
-
-    @Autowired
-    BookService bookService;
-
     private final String CUSTOMER_EDIT_ROUTE_TEMPLATE = "customers-detail/%d/edit";
 
     private final Grid<Customer> customerGrid = new Grid<>(Customer.class, false);
@@ -72,7 +63,15 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
 
     private Customer customer;
 
-    public CustomersDetailView() {
+    private CustomerService customerService;
+
+    public CustomersDetailView(
+            @Autowired CustomerService customerService,
+            @Autowired AddressService addressService,
+            @Autowired BookService bookService
+    ) {
+        this.customerService = customerService;
+
         addClassNames(
             "customers-detail-view", 
             "flex", 
@@ -86,8 +85,8 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
         createGridLayout(splitLayout);
         createEditorLayout(
                 splitLayout,
-                this.addressService.list(),
-                this.bookService.list()
+                addressService.list(),
+                bookService.list()
         );
 
         add(splitLayout);
