@@ -19,6 +19,7 @@ import javax.annotation.security.RolesAllowed;
 import local.example.demo.data.entity.Address;
 import local.example.demo.data.service.AddressService;
 import local.example.demo.views.MainLayout;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("Address Form")
 @Route(value = "address-form", layout = MainLayout.class)
@@ -36,7 +37,7 @@ public class AddressFormView extends Div {
 
     private final Binder<Address> addressBinder = new Binder<>(Address.class);
 
-    public AddressFormView(AddressService addressService) {
+    public AddressFormView(@Autowired AddressService addressService) {
         addClassName("address-form-view");
 
         add(createTitle());
@@ -56,7 +57,7 @@ public class AddressFormView extends Div {
     }
 
     private Component createTitle() {
-        return new H3("Address");
+        return new H3("Address information fields");
     }
 
     private Component createFormLayout() {
