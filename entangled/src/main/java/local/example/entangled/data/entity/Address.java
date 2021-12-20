@@ -17,7 +17,7 @@ public class Address
     private String state;
     private String country;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "address")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "address")
     private Employee employee;
 
     public String getStreet() {
