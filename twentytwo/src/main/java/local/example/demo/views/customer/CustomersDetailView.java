@@ -5,6 +5,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -21,9 +22,16 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
+
+import java.util.List;
 import java.util.Optional;
 import javax.annotation.security.RolesAllowed;
+
+import local.example.demo.data.entity.Address;
+import local.example.demo.data.entity.Book;
 import local.example.demo.data.entity.Customer;
+import local.example.demo.data.service.AddressService;
+import local.example.demo.data.service.BookService;
 import local.example.demo.data.service.CustomerService;
 import local.example.demo.views.MainLayout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +45,12 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
     @Autowired
     CustomerService customerService;
 
+    @Autowired
+    AddressService addressService;
+
+    @Autowired
+    BookService bookService;
+
     private final String CUSTOMER_EDIT_ROUTE_TEMPLATE = "customers-detail/%d/edit";
 
     private final Grid<Customer> customerGrid = new Grid<>(Customer.class, false);
@@ -47,6 +61,9 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
     private TextField phone;
     private DatePicker birthday;
     private TextField occupation;
+
+    private ComboBox<Address> addressComboBox;
+    private ComboBox<Book> bookComboBox;
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
@@ -67,7 +84,11 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
         splitLayout.setSizeFull();
 
         createGridLayout(splitLayout);
-        createEditorLayout(splitLayout);
+        createEditorLayout(
+                splitLayout,
+                this.addressService.list(),
+                this.bookService.list()
+        );
 
         add(splitLayout);
 
@@ -150,7 +171,11 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
         }
     }
 
-    private void createEditorLayout(SplitLayout splitLayout) {
+    private void createEditorLayout(
+            SplitLayout splitLayout,
+            List<Address> addressList,
+            List<Book> bookList
+    ) {
         Div editorLayoutDiv = new Div();
         editorLayoutDiv.setClassName("flex flex-col");
         editorLayoutDiv.setWidth("400px");
@@ -160,19 +185,31 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
+
         this.name = new TextField("Name");
         this.surname = new TextField("Surname");
         this.email = new TextField("Email");
         this.phone = new TextField("Phone");
         this.birthday = new DatePicker("Birthday");
         this.occupation = new TextField("Occupation");
+
+        this.addressComboBox = new ComboBox<>("Address");
+        this.addressComboBox.setItems(addressList);
+        this.addressComboBox.setItemLabelGenerator(Address::getStreet);
+
+        this.bookComboBox = new ComboBox<>("Guest");
+        this.bookComboBox.setItems(bookList);
+        this.bookComboBox.setItemLabelGenerator(Book::getTitle);
+
         Component[] fields = new Component[] {
                 this.name,
                 this.surname,
                 this.email,
                 this.phone,
                 this.birthday,
-                this.occupation
+                this.occupation,
+                this.addressComboBox,
+                this.bookComboBox
         };
 
         for (Component field : fields) {
