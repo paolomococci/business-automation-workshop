@@ -20,7 +20,7 @@ public class Guest
 
     private String role;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "guest")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "guest")
     private Employee employee;
 
     public String getUsername() {
