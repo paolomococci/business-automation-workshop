@@ -19,7 +19,6 @@ error-screenshots/
 webpack.generated.js
 
 # Furthermore:
-HELP.md
 .mvn/
 .vscode/
 generated/
@@ -34,6 +33,7 @@ package.json
 pnpm-lock.yaml
 pnpmfile.js
 README.txt
+HELP.md
 tsconfig.json
 types.d.ts
 webpack.config.js
