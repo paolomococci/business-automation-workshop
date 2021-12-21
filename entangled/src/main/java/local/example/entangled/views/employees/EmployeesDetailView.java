@@ -96,6 +96,7 @@ public class EmployeesDetailView
         employeeGrid.addColumn(Employee::getPhone).setAutoWidth(true);
         employeeGrid.addColumn(Employee::getBirthday).setAutoWidth(true);
         employeeGrid.addColumn(Employee::getAssignment).setAutoWidth(true);
+
         employeeGrid.addColumn(Employee::getAddress).setAutoWidth(true);
         employeeGrid.addColumn(Employee::getGuest).setAutoWidth(true);
 
