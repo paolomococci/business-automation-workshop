@@ -158,7 +158,7 @@
 
     <profiles>
         <profile>
-            <!-- Production mode is activated using -Pproduction -->
+            <!-- Production mode -->
             <id>production</id>
             <build>
                 <plugins>
