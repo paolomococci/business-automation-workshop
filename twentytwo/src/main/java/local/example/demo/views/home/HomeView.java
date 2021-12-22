@@ -19,8 +19,8 @@ public class HomeView extends VerticalLayout {
     public HomeView() {
         setSpacing(false);
 
-        Span nameSpan = new Span("admin: Jenny Doe");
-        Span emailSpan = new Span("jennydoe@example.local");
+        Span nameSpan = new Span("admin: Amy Boss");
+        Span emailSpan = new Span("amy.boss@example.local");
 
         VerticalLayout contactInformation = new VerticalLayout(
             nameSpan, 
