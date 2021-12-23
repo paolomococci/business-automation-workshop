@@ -1,6 +1,7 @@
 package local.example.demo.views.address;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -54,6 +55,7 @@ public class AddressFormView extends Div {
             Notification.show(addressBinder.getBean().getClass().getSimpleName() + " stored!");
             clearForm();
         });
+        save.addClickShortcut(Key.ENTER);
     }
 
     private Component createTitle() {
