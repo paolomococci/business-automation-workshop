@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 public class AntiHiccupTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void mainViewEndpointTest() {
         given()
           .when().get("/")
           .then()
