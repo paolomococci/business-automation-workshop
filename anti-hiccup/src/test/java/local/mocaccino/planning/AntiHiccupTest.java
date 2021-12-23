@@ -12,9 +12,8 @@ public class AntiHiccupTest {
     @Test
     public void testHelloEndpoint() {
         given()
-          .when().get("/hello")
+          .when().get("/")
           .then()
-             .statusCode(200)
-             .body(is("Good morning efficiency!"));
+             .statusCode(200);
     }
 }
