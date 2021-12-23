@@ -2,6 +2,7 @@ package local.example.entangled.views.addresses;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -113,7 +114,7 @@ public class AddressesDetailView
                 Notification.show("An exception happened while trying to store the address details.");
             }
         });
-
+        save.addClickShortcut(Key.ENTER);
     }
 
     @Override
