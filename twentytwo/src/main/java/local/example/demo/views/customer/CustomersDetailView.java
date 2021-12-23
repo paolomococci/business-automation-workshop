@@ -2,6 +2,7 @@ package local.example.demo.views.customer;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -146,7 +147,7 @@ public class CustomersDetailView extends Div implements BeforeEnterObserver {
                 Notification.show("An exception happened while trying to store the customer details!");
             }
         });
-
+        this.save.addClickShortcut(Key.ENTER);
     }
 
     @Override
