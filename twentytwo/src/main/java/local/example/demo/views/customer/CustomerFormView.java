@@ -1,6 +1,7 @@
 package local.example.demo.views.customer;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -76,6 +77,7 @@ public class CustomerFormView extends Div {
             Notification.show(customerBinder.getBean().getClass().getSimpleName() + " details stored!");
             clearForm();
         });
+        save.addClickShortcut(Key.ENTER);
     }
 
     private void clearForm() {
