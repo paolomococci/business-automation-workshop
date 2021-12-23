@@ -2,6 +2,7 @@ package local.example.entangled.views.guests;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -108,7 +109,7 @@ public class GuestsDetailView
                 Notification.show("An exception happened while trying to store the users details.");
             }
         });
-
+        save.addClickShortcut(Key.ENTER);
     }
 
     @Override
