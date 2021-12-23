@@ -2,6 +2,7 @@ package local.example.demo.views.address;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -125,7 +126,7 @@ public class AddressesDetailView extends Div implements BeforeEnterObserver {
                 Notification.show("An exception happened while trying to store the address details!");
             }
         });
-
+        this.save.addClickShortcut(Key.ENTER);
     }
 
     @Override
