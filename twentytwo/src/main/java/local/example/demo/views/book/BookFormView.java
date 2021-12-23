@@ -3,6 +3,7 @@ package local.example.demo.views.book;
 import javax.annotation.security.RolesAllowed;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -55,6 +56,7 @@ public class BookFormView extends Div {
             Notification.show(bookBinder.getBean().getClass().getSimpleName() + " stored!");
             clearForm();
         });
+        save.addClickShortcut(Key.ENTER);
     }
 
     private Component createTitle() {
