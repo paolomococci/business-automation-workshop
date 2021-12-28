@@ -1,0 +1,59 @@
+#Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# IntelliJ
+.idea
+*.ipr
+*.iml
+*.iws
+
+# NetBeans
+nb-configuration.xml
+
+# Visual Studio Code
+.vscode
+.factorypath
+
+# OSX
+.DS_Store
+
+# Vim
+*.swp
+*.swo
+
+# patch
+*.orig
+*.rej
+
+# Local environment
+.env
+
+# Furthermore
+mvnw
+mvnw.cmd
+.mvn/
+out.log
+README.txt
+HELP.md
+
+# Vaadin, everything that is generated automatically
+node_modules
+pnpm-lock.yaml
+frontend/generated
+.npmrc
+package.json
+pnpmfile.js
+tsconfig.json
+types.d.ts
+webpack.config.js
+webpack.generated.js
