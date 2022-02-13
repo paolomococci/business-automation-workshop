@@ -1,3 +1,17 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+code {
+    font-family: monospace;
+    font-size: 87.5%;
+    color: #e38;
+    word-break: break-word;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
     font-weight: 400;
@@ -5,19 +19,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
 }
 
 h2 {
-    font-size: 2rem
+    font-size: 1.6rem
 }
 
 h3 {
-    font-size: 1.75rem
+    font-size: 1.5rem
 }
 
 h4 {
-    font-size: 1.5rem
+    font-size: 1.4rem
 }
 
 h5 {
@@ -28,72 +42,176 @@ h6 {
     font-size: 1rem
 }
 
+p {
+    padding: .15rem 0;
+    margin: 0;
+    line-height: 1.3rem;
+}
+
+a {
+    text-decoration: underline;
+    color: #15aA5;
+}
+
+a:hover, a:active {
+    color: #c00;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    clear: both;
+}
+
+.header-wrapper {
+    padding: 0 13rem;
+    background: black;
+}
+
+.content-wrapper {
+    padding: 0 13rem;
+    background: white;
+}
+
 .lead {
-    font-weight: 300;
     font-size: 2rem;
 }
 
+.header {
+    background-position: 0 1rem;
+    min-height: 60px;
+    grid-column: span 12;
+}
+
+#QuarkusLogoSVG {
+    width: 200px;
+    height: 30px;
+    padding-top: 1rem;
+}
+
 .banner {
-    font-size: 2.7rem;
-    margin: 0;
-    padding: 2rem 1rem;
-    background-color: #0d1c2c;
+    grid-column: span 12;
+    padding: 2rem 0;
+}
+
+.callout {
     color: white;
-}
-
-body {
+    font-size: 3.5rem;
     margin: 0;
-    font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    padding-top: 5rem;
+    grid-column: span 8;
 }
 
-code {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 87.5%;
-    color: #e83e8c;
-    word-break: break-word;
+.appdetails {
+    margin: 1rem 0;
+    border: 1px solid lightgrey;
+    padding: 1rem;
+    background: white;
+    font-size: .75rem;
+    font-weight: 300;
+    grid-column: span 4;
+}
+
+.appdetails ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.appdetails ul li {
+    margin-bottom: 0.2rem;
+}
+
+.appdetails h5 {
+    margin: 0;
+    padding: 0;
 }
 
 .left-column {
-    padding: .75rem;
-    max-width: 75%;
-    min-width: 55%;
+    grid-column: span 8;
+    padding-right: 3rem;
+}
+
+.left-column p {
+    padding: .15rem 0;
+    margin: 0;
+}
+
+.left-column ul {
+    list-style-type: none;
+    padding: 0rem;
+}
+
+.left-column li {
+    padding: .15rem 0rem;
+    font-weight: 500;
 }
 
 .right-column {
-    padding: .75rem;
-    max-width: 25%;
+    grid-column: span 4;
+    margin-top: 5rem;
 }
 
-.container {
-    display: flex;
-    width: 100%;
-}
-
-li {
-    margin: 0.75rem;
-}
-
-.right-section {
-    margin-left: 1rem;
-    padding-left: 0.5rem;
-}
-
-.right-section h3 {
-    padding-top: 0;
+.right-column h3 {
     font-weight: 200;
 }
 
-.right-section ul {
-    border-left: 0.3rem solid #71aeef;
+.right-column h5 {
+    padding: 1rem 0 .25rem 0;
+    margin: 0;
+    font-weight: 200;
+}
+
+.right-column ul {
     list-style-type: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.right-column li {
+    padding: .5rem 0 0 0;
 }
 
 .provided-code {
-    border-left: 0.3rem solid #71aeef;
-    padding-left: 10px;
 }
 
 .provided-code h3 {
     font-weight: 200;
+}
+
+@media screen and (max-width: 1023px) {
+    .header-wrapper {
+        padding: 0 1rem;
+        background: black;
+    }
+    .banner-wrapper {
+        padding: 0 1rem;
+    }
+    .content-wrapper {
+        padding: 0 1rem;
+        background: white;
+    }
+    .left-column {
+        grid-column: span 12;
+    }
+    .right-column {
+        grid-column: span 12;
+        margin: 3rem 0;
+    }
+    .callout {
+        color: white;
+        font-size: 3.5rem;
+        margin: 0;
+        padding: 1rem 0;
+        grid-column: span 12;
+    }
+    .appdetails {
+        margin: 1rem 0;
+        border: 1px solid lightgrey;
+        padding: 1rem;
+        background: white;
+        font-size: 1rem;
+        font-weight: 300;
+        grid-column: span 12;
+    }
 }
