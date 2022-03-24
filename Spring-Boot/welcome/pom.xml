@@ -28,10 +28,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <!--repository>
-            <id>vaadin-prereleases</id>
-            <url>https://maven.vaadin.com/vaadin-prereleases/</url>
-        </repository-->
     </repositories>
 
     <pluginRepositories>
