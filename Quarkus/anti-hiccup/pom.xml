@@ -13,7 +13,7 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>2.8.2.Final</quarkus.platform.version>
-    <vaadin.version>23.0.6</vaadin.version>
+    <vaadin.version>23.0.7</vaadin.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
 
