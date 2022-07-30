@@ -3,7 +3,7 @@
 ## scaffolding
 
 ```shell
-mvn io.quarkus.platform:quarkus-maven-plugin:2.10.3.Final:create \
+mvn io.quarkus.platform:quarkus-maven-plugin:2.11.1.Final:create \
     -DprojectGroupId=local.mocaccino \
     -DprojectArtifactId=sample-planning \
     -DprojectVersion=0.0.1-SNAPSHOT \
