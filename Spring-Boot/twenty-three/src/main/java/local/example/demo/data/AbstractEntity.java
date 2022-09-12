@@ -1,7 +1,5 @@
 package local.example.demo.data;
 
-import com.vaadin.fusion.Nonnull;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -11,7 +9,6 @@ public abstract class AbstractEntity {
 
     @Id
     @GeneratedValue
-    @Nonnull
     private Integer id;
 
     public Integer getId() {
